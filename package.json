@@ -1,0 +1,16 @@
+{
+  "name": "refute",
+  "version": "1.0.0",
+  "description": "Ad-hoc contract programming",
+  "main": "refute.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "keywords": [
+    "testing",
+    "assertion",
+    "contract"
+  ],
+  "author": "Konstantin Uvarin <khedin@gmail.com>",
+  "license": "ISC"
+}
