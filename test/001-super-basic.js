@@ -15,9 +15,20 @@ describe( 'refute.Contract', () => {
 
     it ( 'can pass', done => {
         const ok = new refute.Contract();
-        ok.equals( 2*2, 4 );
+        ok.equals( 'animal', 'animal' );
         expect( ok.isPassing() ).to.equal(true);
         expect( ok.getSignature() ).to.equal('t1d');
         done();
     });
+
+    it ( 'can fail', done => {
+        const ok = new refute.Contract();
+        ok.equals( 'freedom', 'slavery' );
+        expect( ok.isPassing() ).to.equal(false);
+        expect( ok.getSignature() ).to.equal('tNd');
+        done();
+    });
+
+
 });
+
