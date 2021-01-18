@@ -14,7 +14,6 @@ describe( 'refute.Contract', () => {
         contract.equals( 'freedom', 'slavery' );
 
         const tap = contract.getReport();
-        console.log(tap);
 
         const lines = tap.split('\n');
 
