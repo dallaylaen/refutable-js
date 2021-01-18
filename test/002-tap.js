@@ -1,0 +1,28 @@
+'use strict';
+const chai = require('chai');
+const should = chai.should();
+const expect = chai.expect;
+
+const refute = require( '../lib/refute.js' );
+
+describe( 'refute.Contract', () => {
+    it( 'can generate TAP', done => {
+        const contract = new refute.Contract();
+
+        contract.equals( 'animal', 'animal', 'all animals are equal' );
+        contract.equals( 'freedom', 'slavery', 'freedom is slavery' );
+
+        const tap = contract.getReport();
+
+        const lines = tap.split('\n');
+
+        expect( lines[ 0] ).to.equal('1..2');
+        expect( lines[ 1] ).to.equal('ok 1'); // TODO descr
+        expect( lines[ 2] ).to.equal('not ok 2');
+
+        expect( lines.slice(-2)[0] ).to.match(/^# .*Failed/i);
+        expect( lines.slice(-1)[0] ).to.equal('');
+        
+        done();
+    });
+});
