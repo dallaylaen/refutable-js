@@ -13,7 +13,7 @@ describe( 'refute.Contract', () => {
         contract.diag(1984);
         contract.equals( 'freedom', 'slavery' );
 
-        const tap = contract.getReport();
+        const tap = contract.getTap();
 
         const lines = tap.split('\n');
 
