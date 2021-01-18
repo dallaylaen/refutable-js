@@ -11,14 +11,16 @@ describe( 'refute.Contract', () => {
 
         contract.equals( 'animal', 'animal', 'all animals are equal' );
         contract.diag(1984);
-        contract.equals( 'freedom', 'slavery', 'freedom is slavery' );
+        contract.equals( 'freedom', 'slavery' );
 
         const tap = contract.getReport();
+        console.log(tap);
 
         const lines = tap.split('\n');
 
         expect( lines[0] ).to.equal('1..2');
-        expect( lines[1] ).to.equal('ok 1'); // TODO descr
+        expect( lines[1] ).to.match(/^ok 1/);
+        expect( lines[1] ).to.equal('ok 1 - all animals are equal');
         expect( lines[2] ).to.equal('# 1984');
         expect( lines[3] ).to.equal('not ok 2');
 
