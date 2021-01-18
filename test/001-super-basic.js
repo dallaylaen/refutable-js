@@ -29,6 +29,19 @@ describe( 'refute.Contract', () => {
         done();
     });
 
+    it ( 'can nest', done => {
+        const ok = refute.report( ok => {
+            ok.equals( 1, 1 );
+            ok.nested( 'foo bared', ok2 => {
+                ok2.equals( 'war', 'peace' );
+            });
+            ok.equals( 1, 1 );
+        });
 
+        expect( ok.isPassing() ).to.equal(false);
+        console.log( ok.getTap() );
+
+        done();
+    });
 });
 
