@@ -39,7 +39,6 @@ describe( 'refute.Contract', () => {
         });
 
         expect( ok.isPassing() ).to.equal(false);
-        console.log( ok.getTap() );
 
         done();
     });
