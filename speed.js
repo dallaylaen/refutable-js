@@ -8,7 +8,7 @@ for (let i = 0; i < 1000; i++) {
         for (let j = 0; j < 1000; j++) {
             ok.equals( j, j, 'j equals itself' );
         };
-        ok.getReport();
+        ok.getTap();
     });
     
 };
