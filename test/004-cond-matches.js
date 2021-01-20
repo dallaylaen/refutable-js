@@ -5,7 +5,7 @@ const expect = chai.expect;
 
 const refute = require( '../lib/refute.js' );
 
-describe( 'Contract.matches', () => {
+describe( 'Report.matches', () => {
     const report = refute.report( ok => {
         ok.matches( 'foo', /(.)\1/ );
         ok.matches( 'bar', /(.)\1/ );

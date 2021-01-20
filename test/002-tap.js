@@ -5,9 +5,9 @@ const expect = chai.expect;
 
 const refute = require( '../lib/refute.js' );
 
-describe( 'refute.Contract', () => {
+describe( 'refute.Report', () => {
     it( 'can generate TAP', done => {
-        const contract = new refute.Contract();
+        const contract = new refute.Report();
 
         contract.equals( 'animal', 'animal', 'all animals are equal' );
         contract.diag(1984);

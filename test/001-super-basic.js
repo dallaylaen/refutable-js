@@ -5,16 +5,16 @@ const expect = chai.expect;
 
 const refute = require( '../lib/refute.js' );
 
-describe( 'refute.Contract', () => {
+describe( 'refute.Report', () => {
     it ( 'passes by default', done => {
-        const ok = new refute.Contract();
+        const ok = new refute.Report();
         expect( ok.isPassing() ).to.equal(true);
         expect( ok.getGhost() ).to.equal('td');
         done();
     });
 
     it ( 'can pass', done => {
-        const ok = new refute.Contract();
+        const ok = new refute.Report();
         ok.equals( 'animal', 'animal' );
         expect( ok.isPassing() ).to.equal(true);
         expect( ok.getGhost() ).to.equal('t1d');
@@ -22,7 +22,7 @@ describe( 'refute.Contract', () => {
     });
 
     it ( 'can fail', done => {
-        const ok = new refute.Contract();
+        const ok = new refute.Report();
         ok.equals( 'freedom', 'slavery' );
         expect( ok.isPassing() ).to.equal(false);
         expect( ok.getGhost() ).to.equal('tNd');
