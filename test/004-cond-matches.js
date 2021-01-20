@@ -11,7 +11,7 @@ describe( 'Report.matches', () => {
         ok.matches( 'bar', /(.)\1/ );
     });
     it( 'good signature', done => {
-        expect( report.getGhost() ).to.equal('<1N>');
+        expect( report.getGhost() ).to.equal('r(1,N)');
         done();
     });
 
