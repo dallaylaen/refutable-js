@@ -39,6 +39,7 @@ describe( 'refute.Report', () => {
         });
 
         expect( ok.isPassing() ).to.equal(false);
+        expect( ok.getGhost() ).to.equal('t1tNd1d');
 
         done();
     });
