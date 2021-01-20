@@ -11,7 +11,7 @@ describe( 'Contract.matches', () => {
         ok.matches( 'bar', /(.)\1/ );
     });
     it( 'good signature', done => {
-        expect( report.getSignature() ).to.equal('t1Nd');
+        expect( report.getGhost() ).to.equal('t1Nd');
         done();
     });
 

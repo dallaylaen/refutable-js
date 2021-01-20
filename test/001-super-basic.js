@@ -9,7 +9,7 @@ describe( 'refute.Contract', () => {
     it ( 'passes by default', done => {
         const ok = new refute.Contract();
         expect( ok.isPassing() ).to.equal(true);
-        expect( ok.getSignature() ).to.equal('td');
+        expect( ok.getGhost() ).to.equal('td');
         done();
     });
 
@@ -17,7 +17,7 @@ describe( 'refute.Contract', () => {
         const ok = new refute.Contract();
         ok.equals( 'animal', 'animal' );
         expect( ok.isPassing() ).to.equal(true);
-        expect( ok.getSignature() ).to.equal('t1d');
+        expect( ok.getGhost() ).to.equal('t1d');
         done();
     });
 
@@ -25,7 +25,7 @@ describe( 'refute.Contract', () => {
         const ok = new refute.Contract();
         ok.equals( 'freedom', 'slavery' );
         expect( ok.isPassing() ).to.equal(false);
-        expect( ok.getSignature() ).to.equal('tNd');
+        expect( ok.getGhost() ).to.equal('tNd');
         done();
     });
 
