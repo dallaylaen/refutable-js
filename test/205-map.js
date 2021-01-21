@@ -13,7 +13,6 @@ describe( 'Report.map', () => {
         });
         outer.stop();
 
-        console.log( outer.getTap() );
         expect( outer.getGhost() ).to.equal('r(r(r(2),r(N,1),r(1,N)))');
 
         done();
