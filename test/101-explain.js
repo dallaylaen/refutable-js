@@ -52,9 +52,29 @@ describe( 'explain', () => {
     it ('handles seen objects', done => {
         const foo = new Foo(42);
 
-        expect( explain( [foo, foo] ) ).to.equal('[Foo {"n":42}, Foo {...(seen)}]');
+        expect( explain( [foo, foo] ) ).to.equal('[Foo {"n":42}, Foo {"n":42}]');
         expect( explain( { x:foo, y:foo, z:new Foo(42) } ) )
-            .to.equal('{"x":Foo {"n":42}, "y":Foo {...(seen)}, "z":Foo {"n":42}}');
+            .to.equal('{"x":Foo {"n":42}, "y":Foo {"n":42}, "z":Foo {"n":42}}');
+
+        done();
+    });
+
+    it ('handles circular objects', done => {
+        const foo = {};
+        foo.bar = [ 42, foo ];
+
+        expect( explain( foo ) ).to.equal( '{"bar":[42, {...(seen)}]}' );
+
+        const typed = new Foo(137);
+        typed.bar = [ 42, typed ];
+
+        expect( explain( typed ) ).to.equal( 'Foo {"bar":[42, Foo {...(seen)}], "n":137}' );
+
+        const array = [];
+        array[0] = 3.14;
+        array[1] = [ array, array ];
+
+        expect( explain(array) ).to.equal( '[3.14, [[...(seen)], [...(seen)]]]' );
 
         done();
     });
