@@ -6,7 +6,7 @@ const refute = require( '../lib/refute.js' );
 
 describe( 'Report.ordered', () => {
     // only allow lists of identical items
-    const contract = (inner, x, y) => inner.equals(x, y);
+    const contract = (inner, x, y) => inner.equal(x, y);
 
     it( 'passes for empty list', done => {
         const ok = new refute.Report();

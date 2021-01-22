@@ -15,8 +15,8 @@ describe( 'refute.Report', () => {
 
     it ( 'can pass', done => {
         const ok = new refute.Report();
-        ok.equals( 'animal', 'animal' );
-        ok.equals( 'animal', 'animal' );
+        ok.equal( 'animal', 'animal' );
+        ok.equal( 'animal', 'animal' );
         expect( ok.isPassing() ).to.equal(true);
         expect( ok.getGhost() ).to.equal('r(2)');
         done();
@@ -24,8 +24,8 @@ describe( 'refute.Report', () => {
 
     it ( 'can fail', done => {
         const ok = new refute.Report();
-        ok.equals( 'freedom', 'slavery' );
-        ok.equals( 'war', 'peace' );
+        ok.equal( 'freedom', 'slavery' );
+        ok.equal( 'war', 'peace' );
         expect( ok.isPassing() ).to.equal(false);
         expect( ok.getGhost() ).to.equal('r(N,N)');
         done();
@@ -33,11 +33,11 @@ describe( 'refute.Report', () => {
 
     it ( 'can nest', done => {
         const ok = refute.report( ok => {
-            ok.equals( 1, 1 );
+            ok.equal( 1, 1 );
             ok.nested( 'foo bared', ok2 => {
-                ok2.equals( 'war', 'peace' );
+                ok2.equal( 'war', 'peace' );
             });
-            ok.equals( 1, 1 );
+            ok.equal( 1, 1 );
         });
 
         expect( ok.isPassing() ).to.equal(false);

@@ -8,8 +8,8 @@ describe( 'Report.map', () => {
     it ( 'runs subtest', done => {
         const outer = new refute.Report();
         outer.map('some array', [ 'foo42', 'bar137', 'foobar' ], (ok, item) => {
-            ok.matches( item, /(.)\1/ );
-            ok.matches( item, /[a-z]+[0-9]+/ );
+            ok.match( item, /(.)\1/ );
+            ok.match( item, /[a-z]+[0-9]+/ );
         });
         outer.stop();
 

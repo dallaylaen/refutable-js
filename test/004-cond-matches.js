@@ -5,10 +5,10 @@ const expect = chai.expect;
 
 const refute = require( '../lib/refute.js' );
 
-describe( 'Report.matches', () => {
+describe( 'Report.match', () => {
     const report = refute.report( ok => {
-        ok.matches( 'foo', /(.)\1/ );
-        ok.matches( 'bar', /(.)\1/ );
+        ok.match( 'foo', /(.)\1/ );
+        ok.match( 'bar', /(.)\1/ );
     });
     it( 'good signature', done => {
         expect( report.getGhost() ).to.equal('r(1,N)');

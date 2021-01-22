@@ -9,9 +9,9 @@ describe( 'refute.Report', () => {
     it( 'can generate TAP', done => {
         const contract = new refute.Report();
 
-        contract.equals( 'animal', 'animal', 'all animals are equal' );
+        contract.equal( 'animal', 'animal', 'all animals are equal' );
         contract.diag(1984);
-        contract.equals( 'freedom', 'slavery' );
+        contract.equal( 'freedom', 'slavery' );
 
         const tap = contract.getTap();
 
