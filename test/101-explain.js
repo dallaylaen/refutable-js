@@ -63,18 +63,18 @@ describe( 'explain', () => {
         const foo = {};
         foo.bar = [ 42, foo ];
 
-        expect( explain( foo ) ).to.equal( '{"bar":[42, {...(seen)}]}' );
+        expect( explain( foo ) ).to.equal( '{"bar":[42, {Circular}]}' );
 
         const typed = new Foo(137);
         typed.bar = [ 42, typed ];
 
-        expect( explain( typed ) ).to.equal( 'Foo {"bar":[42, Foo {...(seen)}], "n":137}' );
+        expect( explain( typed ) ).to.equal( 'Foo {"bar":[42, Foo {Circular}], "n":137}' );
 
         const array = [];
         array[0] = 3.14;
         array[1] = [ array, array ];
 
-        expect( explain(array) ).to.equal( '[3.14, [[...(seen)], [...(seen)]]]' );
+        expect( explain(array) ).to.equal( '[3.14, [[Circular], [Circular]]]' );
 
         done();
     });
