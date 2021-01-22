@@ -6,6 +6,16 @@
   "scripts": {
     "test": "mocha test"
   },
+  "eslintConfig":{
+    "env":{
+      "es6":true,
+      "browser":true,
+      "node":true
+    },
+    "parserOptions":{
+      "ecmaVersion":2020
+    }
+  },
   "keywords": [
     "testing",
     "assertion",
