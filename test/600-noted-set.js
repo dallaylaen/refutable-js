@@ -3,6 +3,7 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const { NotedSet } = require( '../lib/refute/util/noted-set.js' );
+const { explain } = require( '../lib/refute.js' );
 
 describe( 'NotedSet', () => {
     it ('can store objects', done => {
@@ -18,8 +19,6 @@ describe( 'NotedSet', () => {
         ns.add( bar, "bar" );
         expect( ns.get(foo) ).to.equal( "foo" );
         expect( ns.get(bar) ).to.equal( "bar" );
-
-        console.log(ns);
 
         done();
     });
