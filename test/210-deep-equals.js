@@ -67,8 +67,8 @@ describe( 'deepEqual', () => {
             [ { "foo": [42, 42]}, { "bar":137 }, { "quuz": true } ],
             [ { "foo": [42, 43]}, { "bar":137 }, { "quuz": false } ],
             (ok, lines) => {
-                ok.diag( lines );
                 ok.equal( lines.length, 6 );
+                ok.match( lines[0], /\[0\]\["foo"\]\[1\]/ );
             }
         ],
     ];
@@ -84,6 +84,16 @@ describe( 'deepEqual', () => {
 
             if (ok.isPassing() !== item[1])
                 throw new Error( ok.getTap() );
+
+            // contract for output
+            refute( ok.getDetails(1).reason, (ok, data) => {
+                ok.equal( data.length % 3, 0, '3 lines per error' );
+                for (let i = 0; i < data.length; i = i+3) {
+                    ok.match( data[i], /at \$/, 'where difference was found');
+                    ok.match( data[i+1], /^-/, 'got' );
+                    ok.match( data[i+2], /^\+/, 'expected' );
+                };
+            });
 
             if (item[4])
                 refute( ok.getDetails(1).reason, item[4] );
