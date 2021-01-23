@@ -35,6 +35,11 @@ describe( 'refute.config', () => {
         expect( () => refute(contract) ).to.throw(/not ok 1/);
         expect( trace.length ).to.equal(1);
 
+        const etufer = empty.config( {skip: false, onFail: x=>x} );
+
+        etufer(contract);
+        expect( trace.length ).to.equal(2);
+
         done();
     });
 });
