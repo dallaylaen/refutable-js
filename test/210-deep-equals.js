@@ -115,8 +115,6 @@ describe( 'deepEqual', () => {
                 ok.diag( 'expecting '+(item[1] ? 'pass' : 'failure') );
                 ok.deepEqual( item[2], item[3] );
             });
-            if (!ok.isPassing())
-                console.log(ok.getTap());
 
             if (ok.isPassing() !== item[1])
                 throw new Error( ok.getTap() );
