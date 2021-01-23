@@ -11,6 +11,9 @@ describe( 'deepEqual', () => {
         }
     };
 
+    const circularArray = [];
+    circularArray.push( circularArray );
+
     // [ description, isPassing, got, expected, [ getDetails(1).diag ]
     const cases = [
         [
@@ -30,6 +33,24 @@ describe( 'deepEqual', () => {
             false,
             { target: [] },
             { target: {} },
+        ],
+        [
+            'diff type 2',
+            false,
+            { target: {length: 0} },
+            { target: [] },
+        ],
+        [
+            'diff type 3',
+            false,
+            { },
+            "",
+        ],
+        [
+            'null vs undef',
+            false,
+            null,
+            undefined,
         ],
         [
             'diff keys',
@@ -70,6 +91,21 @@ describe( 'deepEqual', () => {
                 ok.equal( lines.length, 6 );
                 ok.match( lines[0], /\[0\]\["foo"\]\[1\]/ );
             }
+        ],
+        [
+            'circular expected',
+            false,
+            [[circularArray]], // bury it deep enough for === to fail
+            circularArray,
+            (ok, data) => {
+                ok.match( data[0], /ircular.*auto-fail/ );
+            },
+        ],
+        [
+            'circular got',
+            false,
+            circularArray,
+            [[[]]],
         ],
     ];
 
