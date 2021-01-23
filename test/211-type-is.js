@@ -39,6 +39,12 @@ describe( 'typeIs', () => {
             'array',
         ],
         [
+            'not array',
+            false,
+            {length:1},
+            'array',
+        ],
+        [
             'object class',
             true,
             new Set(),
@@ -61,6 +67,75 @@ describe( 'typeIs', () => {
                 ok.match( diag[1], /Report/, 'Report class mentioned' );
                 ok.numCmp( diag[1].length, '<', 100, 'does not insert the whole class there');
             }
+        ],
+        [
+            'not number',
+            false,
+            "42",
+            'number',
+        ],
+        [
+            'number',
+            true,
+            42,
+            'number',
+        ],
+        [
+            'number 2',
+            true,
+            3.14,
+            'number',
+        ],
+        [
+            'number inf',
+            true,
+            Infinity,
+            'number',
+        ],
+        [
+            'undef',
+            true,
+            undefined,
+            'undefined',
+        ],
+        [
+            'undef 2',
+            false,
+            null,
+            'undefined',
+        ],
+        [
+            'function',
+            true,
+            x=>x,
+            'function',
+        ],
+        [
+            'boolean',
+            true,
+            true,
+            'boolean',
+        ],
+        [
+            'expecting garbage',
+            false,
+            true,
+            'true',
+            (ok, data) => {
+                ok.match( data[0], /nknown.*type/ );
+            }
+        ],
+        [
+            'object {}',
+            true,
+            {},
+            'object',
+        ],
+        [
+            'blessed object',
+            true,
+            new Set(),
+            'object',
         ],
     ];
 
