@@ -20,4 +20,21 @@ describe( 'refute.config', () => {
 
         done();
     });
+
+    it ('can skip', done => {
+        const empty = refute.config({skip: true});
+        const trace = [];
+        const contract = ok => {
+            ok.fail();
+            trace.push("hello");
+        };
+
+        empty( contract );
+        expect( trace.length ).to.equal(0);
+
+        expect( () => refute(contract) ).to.throw(/not ok 1/);
+        expect( trace.length ).to.equal(1);
+
+        done();
+    });
 });
