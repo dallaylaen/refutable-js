@@ -137,6 +137,36 @@ describe( 'typeIs', () => {
             new Set(),
             'object',
         ],
+        [
+            'not a number',
+            false,
+            NaN,
+            'number',
+        ],
+        [
+            'number+nan',
+            true,
+            NaN,
+            'number+nan',
+        ],
+        [
+            'number+nan 2',
+            true,
+            42,
+            'number+nan',
+        ],
+        [
+            'number+nan 3',
+            true,
+            3.14,
+            'number+nan',
+        ],
+        [
+            'number+nan fail',
+            false,
+            "42",
+            'number+nan',
+        ],
     ];
 
     for (let item of cases) {
