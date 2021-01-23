@@ -143,7 +143,7 @@ describe( 'typeIs', () => {
         it( item[0], done => {
             const ok = refute.report( ok => {
                 ok.diag( 'expecting '+(item[1] ? 'pass' : 'failure') );
-                ok.typeIs( item[2], item[3] );
+                ok.type( item[2], item[3] );
             });
 
             if (ok.isPassing() !== item[1])
