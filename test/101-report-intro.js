@@ -8,6 +8,7 @@ describe( 'Report', () => {
         const ok = new Report();
         expect( ok.isDone()    ).to.equal( false );
         expect( ok.getCount()  ).to.equal( 0 );
+        expect( ok.isPassing() ).to.equal( true );
 
         expect( ok.check( 0, 'zero evidence check' ) ).to.equal( true );
         expect( ok.isDone()    ).to.equal( false );
@@ -33,5 +34,12 @@ describe( 'Report', () => {
 
         done();
     });
-        
+
+    it( 'fails when empty', done => {
+        const ok = new Report();
+        ok.stop();
+        expect( ok.getCount() ).to.equal( 0 );
+        expect( ok.isPassing() ).to.equal( false );
+        done();
+    });
 });

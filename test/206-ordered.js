@@ -11,7 +11,7 @@ describe( 'Report.ordered', () => {
     it( 'passes for empty list', done => {
         const ok = new refute.Report();
         ok.ordered( 'empty', [], contract );
-        expect( ok.getGhost() ).to.equal( 'r(r())' );
+        expect( ok.getGhost() ).to.equal( 'r(1)' );
         expect( ok.isPassing() ).to.equal(true);
 
         done();
@@ -20,7 +20,7 @@ describe( 'Report.ordered', () => {
     it( 'passes for 1 element list', done => {
         const ok = new refute.Report();
         ok.ordered( 'lonely', [42], contract );
-        expect( ok.getGhost() ).to.equal( 'r(r())' );
+        expect( ok.getGhost() ).to.equal( 'r(1)' );
         expect( ok.isPassing() ).to.equal(true);
 
         done();
