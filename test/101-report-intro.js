@@ -28,6 +28,9 @@ describe( 'Report', () => {
         expect( ok.isPassing() ).to.equal( false );
         expect( ok.getGhost()  ).to.equal( 'r(1,N)' );
 
+        expect( () => ok.diag('more text') ).to.throw(/finished/);
+        expect( () => ok.check(0, 'extra check') ).to.throw(/finished/);
+
         done();
     });
         
