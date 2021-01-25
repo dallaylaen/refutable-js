@@ -40,6 +40,7 @@ describe( 'Report', () => {
         ok.stop();
         expect( ok.getCount() ).to.equal( 0 );
         expect( ok.isPassing() ).to.equal( false );
+        expect( ok.getGhost() ).to.equal( 'r(Z)' );
         done();
     });
 });
