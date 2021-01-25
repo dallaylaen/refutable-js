@@ -2,9 +2,19 @@
 
 Lightweight runtime assertion, testing, and contract programming tool.
 
-# Usage
+# Description
 
-Setting up a runtime assertion:
+Refute allows to inject blocks of falsifiable conditions into runtime code.
+Should one or more such conditions fail, a detailed report is generated
+and a configurable action is taken.
+The default is just throwing an error with stringified report.
+
+Condition blocks can be nested and reused.
+New conditions can be defined.
+
+It's noninvasive, concise, and fast.
+
+# Usage
 
 ```javascript
 const refute = require( 'refute.js' );
@@ -13,10 +23,14 @@ const refute = require( 'refute.js' );
 refute( ok => {
     ok.equal( total, price+taxes, 'price as expected' );
     ok.match( str, /f?o?r?m?a?t/, 'string format is fine' );
+    ok.type( foo, 'object', 'no surprises' );
+    ok.check( custom_condition, 'some explanation' );
     if( !ok.isPassing() )
-        ok.diag( 'condition failed on input', input );
+        ok.diag( 'conditions failed on input', input );
 });
 ```
+
+# More examples
 
 Changing default action.
 This _does not_ affect refute instances imported in other places.
