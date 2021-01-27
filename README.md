@@ -30,6 +30,36 @@ refute( ok => {
 });
 ```
 
+# How it works
+
+## The Report object
+
+The `Report` class (available via `refute.Report`) contains information
+about passing and failing checks. It's used as follows:
+
+```javascript
+const ok = new Report();
+
+// running checks
+ok.equals( foo, bar, 'value as expected' );
+ok.diag( "object was", some_object );
+                    // some_object gets auto-serialized
+ok.check( custom_evidence, 'why we care about it' );
+ok.stop();
+                    // no more checks can be run after this
+
+// querying
+ok.isPassing();     // whether checks pass
+ok.getCount();      // how many checks
+ok.getDetails(n);   // detailed info regarding n-th check
+ok.getTap();        // serialized as string
+```
+
+## Contracts
+
+A contract is a function that takes a `Report` object and runs checks
+against it.
+
 # More examples
 
 Changing default action.
