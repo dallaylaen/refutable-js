@@ -180,7 +180,7 @@ describe( 'typeIs', () => {
                 throw new Error( ok.getTap() );
 
             if (item[4])
-                refute( ok.getDetails(1).reason, item[4] );
+                refute( ok.getDetails(1).evidence, item[4] );
 
             done();
         });

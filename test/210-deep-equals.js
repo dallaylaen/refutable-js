@@ -120,7 +120,7 @@ describe( 'deepEqual', () => {
                 throw new Error( ok.getTap() );
 
             // contract for output
-            refute( ok.getDetails(1).reason, (ok, data) => {
+            refute( ok.getDetails(1).evidence, (ok, data) => {
                 ok.equal( data.length % 3, 0, '3 lines per error' );
                 for (let i = 0; i < data.length; i = i+3) {
                     ok.match( data[i], /at \$/, 'where difference was found');
@@ -130,7 +130,7 @@ describe( 'deepEqual', () => {
             });
 
             if (item[4])
-                refute( ok.getDetails(1).reason, item[4] );
+                refute( ok.getDetails(1).evidence, item[4] );
 
             done();
         });
