@@ -6,7 +6,6 @@ const { Report } = refute;
 
 describe( 'Report', () => {
     const jsonContract = (ok, report, json) => {
-        console.log(ok);
         ok.type( json, 'object', 'json is object' );
 
         // scalar fields
