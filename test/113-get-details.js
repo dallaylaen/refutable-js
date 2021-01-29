@@ -3,11 +3,16 @@ const { expect } = require('chai');
 
 const { Report } = require( '../lib/refute/report.js' );
 
+function where() {
+    return new Error("probe").stack.split('\n')[2].match( /([^()\s:]+:\d+)/ )[0];
+};
+
 describe( 'Report.getDetails(n)', () => {
     const ok = new Report();
     ok.diag( 'some contract' );
     ok.check( '', 'passing check' );
-    ok.check( {foo:42}, 'failing check' );
+    // Careful! must have "where" and failing check at the same line
+    ok.check( {foo:42}, 'failing check' ); const line = where();
     ok.diag( 'see?' );
     ok.nested( 'nested check', inner => inner.pass() );
 
@@ -34,6 +39,8 @@ describe( 'Report.getDetails(n)', () => {
         expect( data.name ).to.equal( 'failing check' );
         expect( data.pass ).to.equal( false );
         expect( data.evidence ).to.deep.equal( [ '{"foo":42}' ] );
+        expect( data.where ).to.match( /\.js:\d+/ );
+        expect( data.where ).to.match( new RegExp( line ));
         expect( data.diag ).to.deep.equal( [ 'see?' ] );
         done();
     });
