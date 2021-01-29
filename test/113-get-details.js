@@ -39,7 +39,10 @@ describe( 'Report.getDetails(n)', () => {
         expect( data.name ).to.equal( 'failing check' );
         expect( data.pass ).to.equal( false );
         expect( data.evidence ).to.deep.equal( [ '{"foo":42}' ] );
-        expect( data.where ).to.match( /\.js:\d+/ );
+
+        // must be within this file, whatever its name
+        expect( data.where ).to.match( /test\/\d+-[-\w]+\.js:\d+/ );
+        // must match what refute itself calculated
         expect( data.where ).to.match( new RegExp( line ));
         expect( data.diag ).to.deep.equal( [ 'see?' ] );
         done();
