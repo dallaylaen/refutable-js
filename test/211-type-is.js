@@ -5,7 +5,7 @@ const expect = chai.expect;
 const refute = require( '../lib/refute.js' );
 const Report = refute.Report;
 
-describe( 'typeIs', () => {
+describe( 'type', () => {
     // [ description, isPassing, got, expected, [ getDetails(1).diag ]
     const cases = [
         [
@@ -144,28 +144,28 @@ describe( 'typeIs', () => {
             'number',
         ],
         [
-            'number+nan',
+            'number+nan 1',
             true,
             NaN,
-            'number+nan',
+            ['number','nan'],
         ],
         [
             'number+nan 2',
             true,
             42,
-            'number+nan',
+            ['number','nan'],
         ],
         [
             'number+nan 3',
             true,
             3.14,
-            'number+nan',
+            ['number','nan'],
         ],
         [
             'number+nan fail',
             false,
             "42",
-            'number+nan',
+            ['number','nan'],
         ],
     ];
 
