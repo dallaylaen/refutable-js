@@ -13,7 +13,14 @@ describe( 'explain', () => {
 
     it ('handles simple values', done => {
         expect( explain(undefined) ).to.equal('<undef>');
-        expect( explain(42) ).to.equal(42);
+        expect( explain(42) ).to.equal('42');
+        expect( explain(null) ).to.equal('null');
+        expect( explain(true) ).to.equal('true');
+        expect( explain(false) ).to.equal('false');
+        expect( explain("42") ).to.equal('"42"');
+        expect( explain("null") ).to.equal('"null"');
+        expect( explain("true") ).to.equal('"true"');
+        expect( explain("false") ).to.equal('"false"');
         expect( explain('foo bar') ).to.equal('"foo bar"');
         expect( explain('"foo"\n"bar"') ).to.equal('"\\"foo\\"\\n\\"bar\\""');
         done();
