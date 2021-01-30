@@ -1,9 +1,9 @@
-const { Report } = require( '../lib/refute/report.js' );
+const { refuteUnit } = require( '../lib/refute/mocha.js' );
 
-new Report().setTitle('Report.getMocha()').run( ok=>{
+refuteUnit( 'refuteUnit', ok=>{
     ok.pass('passing test');
     ok.nested( 'passing subtest', inner => {
         inner.pass();
-        inner.pass();
+        inner.check(null, "foo bared");
     });
-}).getMocha();
+});
