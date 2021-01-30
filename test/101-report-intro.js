@@ -10,12 +10,12 @@ describe( 'Report', () => {
         expect( ok.getCount()  ).to.equal( 0 );
         expect( ok.isPassing() ).to.equal( true );
 
-        expect( ok.check( 0, 'zero evidence check' ) ).to.equal( true );
+        expect( ok.check( 0, 'zero evidence check' ) ).to.equal( undefined );
         expect( ok.isDone()    ).to.equal( false );
         expect( ok.getCount()  ).to.equal( 1 );
         expect( ok.isPassing() ).to.equal( true );
         
-        expect( ok.check( 'objection!', 'Phoenix Wright appears' ) ).to.equal( false );
+        expect( ok.check( 'objection!', 'Phoenix Wright appears' ) ).to.equal( undefined );
         expect( ok.isDone()    ).to.equal( false );
         expect( ok.getCount()  ).to.equal( 2 );
         expect( ok.isPassing() ).to.equal( false );
