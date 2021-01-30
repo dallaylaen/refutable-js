@@ -1,15 +1,20 @@
+'use strict';
 const refute = require('./lib/refute.js');
 
-// TODO normal args & timing
-// use time js speed.js
+// TODO use some kind of getopt
+const runs   = Number.parseInt(process.argv[2]) || 1000;
+const checks = Number.parseInt(process.argv[3]) || 1000;
 
-for (let i = 0; i < 1000; i++) {
+const t0 = new Date();
+for (let i = 0; i < runs; i++) {
     refute( ok => {
-        for (let j = 0; j < 1000; j++) {
+        for (let j = 0; j < checks; j++) {
             ok.match( j, /\d+/, 'j is a number' );
         };
         ok.getTap();
     });
-    
 };
 
+const milli = new Date().getMilliseconds() - t0.getMilliseconds();
+console.log( 'Done '+runs+' runs of '+checks+' checks each in '+milli+'ms' );
+console.log( (runs*checks/milli).toFixed(2) + ' checks/ms' );
