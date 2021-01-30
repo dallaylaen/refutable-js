@@ -15,6 +15,6 @@ for (let i = 0; i < runs; i++) {
     });
 };
 
-const milli = new Date().getMilliseconds() - t0.getMilliseconds();
+const milli = new Date() - t0;
 console.log( 'Done '+runs+' runs of '+checks+' checks each in '+milli+'ms' );
 console.log( (runs*checks/milli).toFixed(2) + ' checks/ms' );
