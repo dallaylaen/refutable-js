@@ -86,3 +86,28 @@ describe( 'explain', () => {
         done();
     });
 });
+
+describe( 'explain vs JSON', () => {
+    const input = [
+        'foo bared',
+        'foo\nbared',
+        'foo "bared"',
+        {foo:42},
+        {foo:"bar"},
+        42,
+        false,
+        true,
+        null,
+        [ null, null ],
+        [ {foo:{bar:42}}, 0, false, [] ],
+        '',
+    ];
+
+    for (let value of input) {
+        const json = JSON.stringify(value).replace( /,/g, ', ' );
+        it( json, done => {
+            expect( explain( value, Infinity ) ).to.equal( json );
+            done();
+        });
+    };
+});
