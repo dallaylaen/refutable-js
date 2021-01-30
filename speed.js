@@ -6,7 +6,7 @@ const refute = require('./lib/refute.js');
 for (let i = 0; i < 1000; i++) {
     refute( ok => {
         for (let j = 0; j < 1000; j++) {
-            ok.equals( j, j, 'j equals itself' );
+            ok.match( j, /\d+/, 'j is a number' );
         };
         ok.getTap();
     });
