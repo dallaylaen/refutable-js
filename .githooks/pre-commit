@@ -21,7 +21,7 @@ for i in `git diff --name-only --cached --diff-filter=AM | grep 'lib/.*\.js'`; d
     assert eslint "$i"
     assert ! grep -q "' $'" $i
 done
-assert nyc mocha
+assert npm test
 
 if [ ! -z "$FAIL" ]; then
     die "$FAIL"
