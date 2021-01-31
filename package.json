@@ -4,7 +4,7 @@
   "description": "Ad-hoc contract programming",
   "main": "refute.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "nyc mocha && browserify lib/refute.js -d -o docs/js/refute.js"
   },
   "eslintConfig":{
     "env":{
