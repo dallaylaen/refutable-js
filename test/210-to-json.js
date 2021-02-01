@@ -9,7 +9,7 @@ describe( 'Report', () => {
         ok.type( json, 'object', 'json is object' );
 
         // scalar fields
-        ok.equal( json.pass, report.isPassing(), 'pass is reflected' );
+        ok.equal( json.pass, report.getPass(), 'pass is reflected' );
         ok.equal( json.count, report.getCount(), 'count is reflected' );
 
         // details

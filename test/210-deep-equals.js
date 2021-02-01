@@ -14,7 +14,7 @@ describe( 'deepEqual', () => {
     const circularArray = [];
     circularArray.push( circularArray );
 
-    // [ description, isPassing, got, expected, [ getDetails(1).diag ]
+    // [ description, getPass, got, expected, [ getDetails(1).diag ]
     const cases = [
         [
             'simple nested',
@@ -116,7 +116,7 @@ describe( 'deepEqual', () => {
                 ok.deepEqual( item[2], item[3] );
             });
 
-            if (ok.isPassing() !== item[1])
+            if (ok.getPass() !== item[1])
                 throw new Error( ok.getTap() );
 
             // contract for output

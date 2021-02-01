@@ -6,7 +6,7 @@ const refute = require( '../lib/refute.js' );
 const Report = refute.Report;
 
 describe( 'type', () => {
-    // [ description, isPassing, got, expected, [ getDetails(1).diag ]
+    // [ description, getPass, got, expected, [ getDetails(1).diag ]
     const cases = [
         [
             'null pass',
@@ -176,7 +176,7 @@ describe( 'type', () => {
                 ok.type( item[2], item[3] );
             });
 
-            if (ok.isPassing() !== item[1])
+            if (ok.getPass() !== item[1])
                 throw new Error( ok.getTap() );
 
             if (item[4])

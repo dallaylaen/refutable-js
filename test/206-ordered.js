@@ -12,7 +12,7 @@ describe( 'Report.ordered', () => {
         const ok = new refute.Report();
         ok.ordered( 'empty', [], contract );
         expect( ok.getGhost() ).to.equal( 'r(1)' );
-        expect( ok.isPassing() ).to.equal(true);
+        expect( ok.getPass() ).to.equal(true);
 
         done();
     });
@@ -21,7 +21,7 @@ describe( 'Report.ordered', () => {
         const ok = new refute.Report();
         ok.ordered( 'lonely', [42], contract );
         expect( ok.getGhost() ).to.equal( 'r(1)' );
-        expect( ok.isPassing() ).to.equal(true);
+        expect( ok.getPass() ).to.equal(true);
 
         done();
     });
@@ -30,7 +30,7 @@ describe( 'Report.ordered', () => {
         const ok = new refute.Report();
         ok.ordered( 'constant', [42, 42, 42], contract );
         expect( ok.getGhost() ).to.equal( 'r(r(r(1),r(1)))' );
-        expect( ok.isPassing() ).to.equal(true);
+        expect( ok.getPass() ).to.equal(true);
 
         done();
     });
@@ -41,7 +41,7 @@ describe( 'Report.ordered', () => {
         // console.log(ok.getTap());
 
         expect( ok.getGhost() ).to.equal( 'r(r(r(1),r(N),r(N)))' );
-        expect( ok.isPassing() ).to.equal(false);
+        expect( ok.getPass() ).to.equal(false);
 
         done();
     });

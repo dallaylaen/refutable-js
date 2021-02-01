@@ -8,7 +8,7 @@ const refute = require( '../lib/refute.js' );
 describe( 'refute.Report', () => {
     it ( 'passes by default', done => {
         const ok = new refute.Report();
-        expect( ok.isPassing() ).to.equal(true);
+        expect( ok.getPass() ).to.equal(true);
         expect( ok.getGhost() ).to.equal('r()');
         done();
     });
@@ -17,7 +17,7 @@ describe( 'refute.Report', () => {
         const ok = new refute.Report();
         ok.equal( 'animal', 'animal' );
         ok.equal( 'animal', 'animal' );
-        expect( ok.isPassing() ).to.equal(true);
+        expect( ok.getPass() ).to.equal(true);
         expect( ok.getGhost() ).to.equal('r(2)');
         done();
     });
@@ -26,7 +26,7 @@ describe( 'refute.Report', () => {
         const ok = new refute.Report();
         ok.equal( 'freedom', 'slavery' );
         ok.equal( 'war', 'peace' );
-        expect( ok.isPassing() ).to.equal(false);
+        expect( ok.getPass() ).to.equal(false);
         expect( ok.getGhost() ).to.equal('r(N,N)');
         done();
     });
@@ -40,7 +40,7 @@ describe( 'refute.Report', () => {
             ok.equal( 1, 1 );
         });
 
-        expect( ok.isPassing() ).to.equal(false);
+        expect( ok.getPass() ).to.equal(false);
         expect( ok.getGhost() ).to.equal('r(1,r(N),1)');
 
         done();
