@@ -1,7 +1,6 @@
 'use strict';
-const chai = require('chai');
-const should = chai.should();
-const expect = chai.expect;
+const { expect } = require('chai');
+const { AssertionError } = require('assert');
 
 const refute = require( '../lib/refute.js' );
 
@@ -14,7 +13,6 @@ describe( 'refute.Report', () => {
         contract.equal( 'freedom', 'slavery' );
 
         const tap = contract.getTap();
-
         const lines = tap.split('\n');
 
         expect( lines[0] ).to.equal('1..2');
@@ -25,7 +23,19 @@ describe( 'refute.Report', () => {
 
         expect( lines.slice(-2)[0] ).to.match(/^# .*Failed/i);
         expect( lines.slice(-1)[0] ).to.equal('');
-        
+
+        lines.pop(); // remove last empty string
+
+        // generate array of lines prefixed with (true, false)
+        const rex = /^(ok|not|1\.\.|#)/;
+
+        // generate AssertionError by hand to give user some clue
+        if (lines.filter(s=>!s.match(rex)).length)
+            throw new AssertionError({
+                expected: 'list of lines matching '+rex,
+                actual:   tap
+            });
+
         done();
     });
 });
