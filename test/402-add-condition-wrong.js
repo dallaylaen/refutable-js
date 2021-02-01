@@ -11,7 +11,7 @@ describe( 'addCondition errors', () => {
         expect( _ => addCondition( 'foo', 'args:1', x=>x ) )
             .to.throw(/options/);
         expect( _ => addCondition( 'foo', {}, x=>x ) )
-            .to.throw(/[Aa]rgs.*number/);
+            .to.throw(/[Aa]rgs.*integer/);
         done();
     });
     it( 'does not override Report methods', done => {
