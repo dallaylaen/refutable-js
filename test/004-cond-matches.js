@@ -1,7 +1,5 @@
 'use strict';
-const chai = require('chai');
-const should = chai.should();
-const expect = chai.expect;
+const { expect } = require('chai');
 
 const refute = require( '../lib/refute.js' );
 
