@@ -6,9 +6,30 @@
     <script src="js/3rd-party/jquery.js"></script>
 </head>
 <body>
-    <h1>Refute.js playground</h1>
-    <textarea rows="8" style="width: 100%" name="code" id="code">refute(ok=&gt;{
-    ok.equal(42, 137, 'life is fine');
+    <h1>Refute.js playground (here be dragons - yet!)</h1>
+    This is a demo page of
+    <a href="https://github.com/dallaylaen/refute-js">refute.js</a> project.
+    Edit code below, open your browser console, then press Run!
+    <textarea rows="8" style="width: 100%" name="code" id="code">
+refute.config({ onFail: ok =&gt; console.log(ok.toString()) });
+    // default is to throw as error
+
+refute.addCondition(
+    'isPrime',
+    {args:1},
+    n =&gt; {
+        if (!Number.isInteger(n))
+            return 'not an integer';
+        for (let i = 2; i*i&lt;=n; i++) {
+            if (!(n%i)) return i+' divides '+n;
+        }
+    }
+);
+
+refute(ok=&gt;{
+    ok.equal('animal', 'animal', 'all animals are equal');
+    ok.match('earth', /art/, 'there\'s always a place for art');
+    ok.isPrime(2021, 'this is gonna be a simple year');
 });
 </textarea>
 <button onclick="return run()">Run!</button>
