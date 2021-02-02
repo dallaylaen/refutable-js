@@ -6,7 +6,7 @@ const refute = require( '../lib/refute.js' );
 const Report = refute.Report;
 
 describe( 'type', () => {
-    // [ description, getPass, got, expected, [ getDetails(1).diag ]
+    // [ description, getPass, got, expected, [ getDetails(1).info ]
     const cases = [
         [
             'null pass',
@@ -61,11 +61,11 @@ describe( 'type', () => {
             false,
             {},
             refute.Report,
-            (ok,diag) => {
-                ok.equal( diag[0], '- {}', 'what we got' );
-                ok.match( diag[1], /^\+ /, 'what we expected');
-                ok.match( diag[1], /Report/, 'Report class mentioned' );
-                ok.numCmp( diag[1].length, '<', 100, 'does not insert the whole class there');
+            (ok,info) => {
+                ok.equal( info[0], '- {}', 'what we got' );
+                ok.match( info[1], /^\+ /, 'what we expected');
+                ok.match( info[1], /Report/, 'Report class mentioned' );
+                ok.numCmp( info[1].length, '<', 100, 'does not insert the whole class there');
             }
         ],
         [
@@ -172,7 +172,7 @@ describe( 'type', () => {
     for (let item of cases) {
         it( item[0], done => {
             const ok = refute.report( ok => {
-                ok.diag( 'expecting '+(item[1] ? 'pass' : 'failure') );
+                ok.info( 'expecting '+(item[1] ? 'pass' : 'failure') );
                 ok.type( item[2], item[3] );
             });
 

@@ -9,17 +9,17 @@ function where() {
 
 describe( 'Report.getDetails(n)', () => {
     const ok = new Report();
-    ok.diag( 'some contract' );
+    ok.info( 'some contract' );
     ok.check( '', 'passing check' );
     // Careful! must have "where" and failing check at the same line
     ok.check( {foo:42}, 'failing check' ); const line = where();
-    ok.diag( 'see?' );
+    ok.info( 'see?' );
     ok.nested( 'nested check', inner => inner.pass() );
 
     it ('n=0', done => {
         const data = ok.getDetails(0);
         expect( data.n ).to.equal( 0 );
-        expect( data.diag ).to.deep.equal( [ 'some contract' ] );
+        expect( data.info ).to.deep.equal( [ 'some contract' ] );
         done();
     });
 
@@ -29,7 +29,7 @@ describe( 'Report.getDetails(n)', () => {
         expect( data.name ).to.equal( 'passing check' );
         expect( data.pass ).to.equal( true );
         // TODO evidence should be missing, now it's empty array
-        expect( data.diag ).to.deep.equal( [ ] );
+        expect( data.info ).to.deep.equal( [ ] );
         done();
     });
     
@@ -44,7 +44,7 @@ describe( 'Report.getDetails(n)', () => {
         expect( data.where ).to.match( /test\/\d+-[-\w]+\.js:\d+/ );
         // must match what refute itself calculated
         expect( data.where ).to.match( new RegExp( line ));
-        expect( data.diag ).to.deep.equal( [ 'see?' ] );
+        expect( data.info ).to.deep.equal( [ 'see?' ] );
         done();
     });
 

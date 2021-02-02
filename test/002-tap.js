@@ -9,7 +9,7 @@ describe( 'refute.Report', () => {
         const contract = new refute.Report();
 
         contract.equal( 'animal', 'animal', 'all animals are equal' );
-        contract.diag(1984);
+        contract.info(1984);
         contract.equal( 'freedom', 'slavery' );
 
         const tap = contract.getTap();

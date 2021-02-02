@@ -14,7 +14,7 @@ describe( 'deepEqual', () => {
     const circularArray = [];
     circularArray.push( circularArray );
 
-    // [ description, getPass, got, expected, [ getDetails(1).diag ]
+    // [ description, getPass, got, expected, [ getDetails(1).info ]
     const cases = [
         [
             'simple nested',
@@ -112,7 +112,7 @@ describe( 'deepEqual', () => {
     for (let item of cases) {
         it( item[0], done => {
             const ok = refute.report( ok => {
-                ok.diag( 'expecting '+(item[1] ? 'pass' : 'failure') );
+                ok.info( 'expecting '+(item[1] ? 'pass' : 'failure') );
                 ok.deepEqual( item[2], item[3] );
             });
 

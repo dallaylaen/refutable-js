@@ -22,7 +22,7 @@ describe( 'Report', () => {
         const report = new Report().run( ok => {
             ok.check( '', 'passing test' );
             ok.check( { foo: 42}, 'failing test' );
-            ok.diag( "foo bared", { bar: 137 } );
+            ok.info( "foo bared", { bar: 137 } );
         }).stop();
 
         const str = JSON.stringify(report);

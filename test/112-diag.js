@@ -4,7 +4,7 @@ const expect = chai.expect;
 
 const { Report } = require( '../lib/refute/report.js' );
 
-describe( 'Report.diag', () => {
+describe( 'Report.info', () => {
     // description, values to pass, expected tap
     const cases = [
         [
@@ -42,7 +42,7 @@ describe( 'Report.diag', () => {
     for (let item of cases) {
         it (item[0], done => {
             const ok = new Report();
-            ok.diag(...item[1]);
+            ok.info(...item[1]);
             expect( ok.getTap() ).to.equal( '1..0\n'+item[2]+'\n' );
             done();
         });

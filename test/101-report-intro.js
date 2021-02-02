@@ -24,7 +24,7 @@ describe( 'Report', () => {
         expect( ok.last() ).to.equal( false );
 
         // check chainability
-        expect( ok.diag( 'some text' ) ).to.equal( ok );
+        expect( ok.info( 'some text' ) ).to.equal( ok );
         expect( ok.stop() ).to.equal( ok );
 
         expect( ok.getDone()    ).to.equal( true );
@@ -32,7 +32,7 @@ describe( 'Report', () => {
         expect( ok.getPass() ).to.equal( false );
         expect( ok.getGhost()  ).to.equal( 'r(1,N)' );
 
-        expect( () => ok.diag('more text') ).to.throw(/finished/);
+        expect( () => ok.info('more text') ).to.throw(/finished/);
         expect( () => ok.check(0, 'extra check') ).to.throw(/finished/);
 
         // unaffected by dying calls
