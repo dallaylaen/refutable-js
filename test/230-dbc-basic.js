@@ -1,14 +1,12 @@
 'use strict';
 const { expect } = require ('chai' );
 
-const {DBC} = require( '../lib/refute/dbc.js' );
-require( '../lib/refute.js' ); // load condition library
+const refute = require( '../lib/refute.js' );
 
 describe( 'Eiffel-style contracts', () => {
     it( 'can decorate a function', done => {
         const orig = (a,b) => a + b;
-        const dbc = new DBC()
-        .pre( (must, _, a, b) => {
+        const dbc = refute.dbc.pre( (must, _, a, b) => {
             must.type( a, 'number' );
             must.type( b, 'number' );
         })
@@ -25,7 +23,6 @@ describe( 'Eiffel-style contracts', () => {
 
         expect( () => deco( 2, '2' ) ).to.throw( /pre-condition.*\+ number/s );
         expect( () => deco( -1, 2  ) ).to.throw( /post-condition.*is not >/s );
-        
 
         done();
     });
