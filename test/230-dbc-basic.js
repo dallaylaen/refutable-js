@@ -26,4 +26,18 @@ describe( 'Eiffel-style contracts', () => {
 
         done();
     });
+
+    it( 'another example', done => {
+        function square(x) { return x * x };
+        square = refute.dbc
+            .pre ( (ok, _, x ) => ok.type(x, 'number') )
+            .post( (ok, r, _ ) => ok.numCmp(r, '>=', 0) )
+            .decorate( square );
+
+        expect( square(5) ).to.equal(25);
+
+        expect( () => square('x') ).to.throw(/number/);
+        done();
+    });
+
 });
