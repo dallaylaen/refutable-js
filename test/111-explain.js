@@ -75,7 +75,7 @@ describe( 'explain', () => {
         const typed = new Foo(137);
         typed.bar = [ 42, typed ];
 
-        expect( explain( typed ) ).to.equal( 'Foo {"bar":[42, Foo {Circular}], "n":137}' );
+        expect( explain( typed ) ).to.equal( 'Foo {"bar":[42, {Circular}], "n":137}' );
 
         const array = [];
         array[0] = 3.14;
