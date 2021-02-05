@@ -70,18 +70,32 @@ describe( 'explain', () => {
         const foo = {};
         foo.bar = [ 42, foo ];
 
-        expect( explain( foo ) ).to.equal( '{"bar":[42, {Circular}]}' );
+        expect( explain( foo ) ).to.equal( '{"bar":[42, { Circular=$ }]}' );
 
         const typed = new Foo(137);
         typed.bar = [ 42, typed ];
 
-        expect( explain( typed ) ).to.equal( 'Foo {"bar":[42, {Circular}], "n":137}' );
+        expect( explain( typed ) ).to.equal( 'Foo {"bar":[42, { Circular=$ }], "n":137}' );
 
         const array = [];
         array[0] = 3.14;
         array[1] = [ array, array ];
 
-        expect( explain(array) ).to.equal( '[3.14, [[Circular], [Circular]]]' );
+        expect( explain(array) ).to.equal( '[3.14, [[ Circular=$ ], [ Circular=$ ]]]' );
+
+        done();
+    });
+
+    it ('handles convoluted circular paths', done => {
+        const left  = [];
+        const right = [];
+        left.push( [[right]] );
+        right.push( [left] );
+        const butterfly = [ { left }, { right } ];
+
+        const str = explain( butterfly, 20 );
+        expect( str ).to.match( /\[ Circular=\$\[0\]\["left"\] \]/ );
+        expect( str ).to.match( /\[ Circular=\$\[1\]\["right"\] \]/ );
 
         done();
     });
