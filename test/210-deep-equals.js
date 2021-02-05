@@ -11,8 +11,14 @@ describe( 'deepEqual', () => {
         }
     };
 
-    const circularArray = [];
-    circularArray.push( circularArray );
+    const circ = (n) => {
+        const root = [];
+        let deep = root;
+        while(n-->0)
+            deep = [deep];
+        root.push(deep);
+        return root;
+    };
 
     // [ description, getPass, got, expected, [ getDetails(1).info ]
     const cases = [
@@ -95,18 +101,44 @@ describe( 'deepEqual', () => {
         [
             'circular expected',
             false,
-            [[circularArray]], // bury it deep enough for === to fail
-            circularArray,
+            [[circ(0)]], // bury it deep enough for === to fail
+            circ(0),
             (ok, data) => {
-                ok.match( data[0], /ircular.*auto-fail/ );
+                ok.equal( data.length, 3, '3 lines total' )
+                ok.match( data[0], /ircular/ );
+                ok.match( data[1], /=\$/ );
+                ok.match( data[2], /=\$$/ );
+                if (!ok.getPass()) {
+                    ok.info( "result was: " );
+                    data.forEach( s => ok.info( s ));
+                };
             },
         ],
         [
             'circular got',
             false,
-            circularArray,
+            circ(0),
             [[[]]],
+            (ok, data) => {
+                ok.match(data[0], /\$\[0\] *\([Cc]ircular\)/);
+            },
         ],
+        [
+            'circular pass',
+            true,
+            circ(4),
+            circ(4),
+        ],
+        [
+            'circular not mislead',
+            false,
+            [  circ(4), ],
+            [[ circ(3) ]],
+            (ok, data) => {
+                ok.match( data[1], /\$\[0\]$/ );
+                ok.match( data[2], /\$\[0\]\[0\]$/ );
+            },
+        ]
     ];
 
     for (let item of cases) {
