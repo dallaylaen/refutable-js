@@ -19,11 +19,13 @@ describe( 'Report', () => {
     };
 
     it ('can toJSON', done => {
-        const report = new Report().run( ok => {
+        const report = new Report();
+        report.run( ok => {
             ok.check( '', 'passing test' );
             ok.check( { foo: 42}, 'failing test' );
             ok.info( "foo bared", { bar: 137 } );
-        }).stop();
+        });
+        report.stop();
 
         const str = JSON.stringify(report);
 
