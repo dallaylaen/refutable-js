@@ -1,8 +1,12 @@
 {
   "name": "refute",
   "version": "1.0.0",
-  "description": "Ad-hoc contract programming",
+  "description": "A runtime assertion, testing, and contract programming tool",
   "main": "refute.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dallaylaen/refute-js.git"
+  },
   "scripts": {
     "test": "nyc mocha && browserify lib/refute.js -d -o docs/js/refute.js"
   },
@@ -19,7 +23,7 @@
   "keywords": [
     "testing",
     "assertion",
-    "contract"
+    "contract programming"
   ],
   "author": "Konstantin Uvarin <khedin@gmail.com>",
   "license": "ISC"
