@@ -25,7 +25,7 @@ describe( 'Report', () => {
 
         // check chainability
         expect( ok.info( 'some text' ) ).to.equal( ok );
-        expect( ok.stop() ).to.equal( ok );
+        expect( ok.done() ).to.equal( ok );
 
         expect( ok.getDone()    ).to.equal( true );
         expect( ok.getCount()  ).to.equal( 2 );
@@ -48,7 +48,7 @@ describe( 'Report', () => {
 
     it( 'fails when empty', done => {
         const ok = new Report();
-        ok.stop();
+        ok.done();
         expect( ok.getCount() ).to.equal( 0 );
         expect( ok.getPass() ).to.equal( false );
         expect( ok.getGhost() ).to.equal( 'r(Z)' );

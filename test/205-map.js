@@ -11,7 +11,7 @@ describe( 'Report.map', () => {
             ok.match( item, /(.)\1/ );
             ok.match( item, /[a-z]+[0-9]+/ );
         });
-        outer.stop();
+        outer.done();
 
         expect( outer.getGhost() ).to.equal('r(r(r(2),r(N,1),r(1,N)))');
 
