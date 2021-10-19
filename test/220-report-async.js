@@ -20,5 +20,21 @@ describe( 'Report(async)', () => {
             done();
         });
     });
+
+
+    if (0) {
+    it( 'can handle Promise as evidence', done => {
+        new Report().async(2000, ok => {
+            ok.check( Promise.resolve(0), 'pass' );
+            ok.check( Promise.resolve(1), 'fail' );
+            ok.done();
+        }).then( report => {
+            expect( report ).to.be.instanceof(Report);
+            expect( report.getGhost() ).to.equal( 'r(1,N)' );
+            done();
+        });
+
+    });
+    }
 });
 
