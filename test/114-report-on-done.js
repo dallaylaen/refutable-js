@@ -47,10 +47,42 @@ describe( 'Report', () => {
         expect( rep.getPass() ).to.equal( true ); // not failed just yet
         
         pipe( "foo bared" );
-        setTimeout( () => {
+        setTimeout( () => { // let the event loop tick once
             expect( rep.getDone() ).to.equal( true );
             expect( rep.getPass() ).to.equal( false );
             expect( trace ).to.deep.equal( [rep] );
+
+            done();
+        }, 0);
+    });
+
+    it( 'can handle nested contracts in async mode', done => {
+        const trace = [];
+        const inner = new Report();
+        const outer = new Report();
+        outer.onDone( x => trace.push(x));
+
+        outer.pass(); // add some padding so that we have at least 1 check
+        outer.check( inner ); // hack!
+        outer.done();
+
+        expect( outer.getDone() ).to.equal( false );
+        expect( outer.getPass() ).to.equal( true );
+
+        expect( trace ).to.deep.equal( [] );
+
+        inner.check( 'foo bared' );
+        inner.done();
+
+        // still because promise - TODO remove
+        expect( trace ).to.deep.equal( [] );
+
+        setTimeout( () => { // let the event loop tick once
+            console.log( outer.getTap() );
+
+            expect( outer.getDone() ).to.equal( true );
+            expect( outer.getPass() ).to.equal( false );
+            expect( trace ).to.deep.equal( [outer] );
 
             done();
         }, 0);
