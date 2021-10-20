@@ -71,15 +71,20 @@ describe( 'Report', () => {
 
         expect( trace ).to.deep.equal( [] );
 
-        inner.check( 'foo bared' );
+        inner.pass( 'padding' );
+        inner.pass( 'padding' );
+        inner.check( Promise.resolve('foo bared') );
+        // TODO make sure inner promise doesn't resolve prematurely
+        //      even if some future JS version permits that
         inner.done();
 
-        // still because promise - TODO remove
-        expect( trace ).to.deep.equal( [] );
+        // check that pending tests are reflected in TAP
+        // console.log( outer.getTap() );
+        expect( outer.getTap() ).to.match( new RegExp('^pending 2', 'm') );
+        expect( outer.getTap() ).to.match( new RegExp('^  +pending 3', 'm') );
 
         setTimeout( () => { // let the event loop tick once
-            console.log( outer.getTap() );
-
+            // TODO check file & line attribution - must be _this_ file
             expect( outer.getDone() ).to.equal( true );
             expect( outer.getPass() ).to.equal( false );
             expect( trace ).to.deep.equal( [outer] );
