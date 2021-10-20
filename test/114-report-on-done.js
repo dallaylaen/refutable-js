@@ -23,7 +23,6 @@ describe( 'Report', () => {
         done();
     });
 
-if(0) {
     it( 'can handle on_done callback in async mode', done => {
         const trace = [];
 
@@ -37,6 +36,7 @@ if(0) {
             pipe = resolve;
         });
 
+        rep.pass('nothing');
         rep.check( later, 'deferred check' );
         expect( trace ).to.deep.equal( [] );
 
@@ -44,16 +44,16 @@ if(0) {
         rep.done();
         expect( trace ).to.deep.equal( [] );
         expect( rep.getDone() ).to.equal( false );
+        expect( rep.getPass() ).to.equal( true ); // not failed just yet
         
         pipe( "foo bared" );
-        timeout( () => {
-            expect( trace ).to.deep.equal( [rep] );
+        setTimeout( () => {
             expect( rep.getDone() ).to.equal( true );
-            console.log( rep.getTap() );
+            expect( rep.getPass() ).to.equal( false );
+            expect( trace ).to.deep.equal( [rep] );
 
             done();
         }, 0);
     });
-};
 });
 
