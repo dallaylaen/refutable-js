@@ -20,6 +20,10 @@ describe( 'Report', () => {
         rep.done();
         expect( trace ).to.deep.equal( [rep] );
 
+        // can call done() multiple times
+        rep.done();
+        expect( trace ).to.deep.equal( [rep] );
+
         done();
     });
 
