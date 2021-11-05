@@ -62,6 +62,7 @@ describe( 'type', () => {
             {},
             refute.Report,
             (ok,info) => {
+                info = info.map( x => ''+x );
                 ok.equal( info[0], '- {}', 'what we got' );
                 ok.match( info[1], /^\+ /, 'what we expected');
                 ok.match( info[1], /Report/, 'Report class mentioned' );

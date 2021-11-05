@@ -39,7 +39,8 @@ describe( 'Report.getDetails(n)', () => {
         expect( data.n ).to.equal( 2 );
         expect( data.name ).to.equal( 'failing check' );
         expect( data.pass ).to.equal( false );
-        expect( data.evidence ).to.deep.equal( [ '{"foo":42}' ] );
+        expect( data.evidence ).to.be.instanceof( Array );
+        expect( data.evidence.map( x=>''+x) ).to.deep.equal( [ '{"foo":42}' ] );
 
         // must be within this file, whatever its name
         expect( data.where ).to.match( /test\/\d+-[-\w]+\.js:\d+/ );
