@@ -38,6 +38,7 @@ describe( 'DiffTree', () => {
         inner.append( diffTree.plan( '1..2' ) );
         inner.append( diffTree.fail( '1 - failing test' ) );
         inner.append( embed(
+            diffTree.location( 'foobar.js:136:42' ),
             diffTree.actual( 'war' ),
             diffTree.expected( 'peace' ),
             diffTree.note( 'we are not in 1984' )
