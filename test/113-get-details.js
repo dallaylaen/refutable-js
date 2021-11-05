@@ -19,7 +19,8 @@ describe( 'Report.getDetails(n)', () => {
     it ('n=0', done => {
         const data = ok.getDetails(0);
         expect( data.n ).to.equal( 0 );
-        expect( data.info ).to.deep.equal( [ 'some contract' ] );
+        expect( data.info ).to.be.instanceof(Array);
+        expect( data.info.map( x => ''+x ) ).to.deep.equal( [ 'some contract' ] );
         done();
     });
 
@@ -44,7 +45,8 @@ describe( 'Report.getDetails(n)', () => {
         expect( data.where ).to.match( /test\/\d+-[-\w]+\.js:\d+/ );
         // must match what refute itself calculated
         expect( data.where ).to.match( new RegExp( line ));
-        expect( data.info ).to.deep.equal( [ 'see?' ] );
+        expect( data.info ).to.be.instanceof(Array);
+        expect( data.info.map( x => ''+x ) ).to.deep.equal( [ 'see?' ] );
         done();
     });
 
