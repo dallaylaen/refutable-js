@@ -19,11 +19,13 @@ describe( 'Report.match', () => {
         done();
     });
 
+    console.log( report.getTap() );
+
     it( 'can fail', done => {
         const data = report.getDetails(2);
         expect( data.pass ).to.equal(false);
-        expect( data.evidence[0] ).to.match( /bar/ );
-        expect( data.evidence[1] ).to.match( /does not match.*\\1/i );
+        expect( data.evidence[0] ).to.match( /^[# ]*\- .* "bar"/ );
+        expect( data.evidence[1] ).to.match( /^[# ]*\+ .* \/\(\.\)\\1\// );
         done();
     });
 });
