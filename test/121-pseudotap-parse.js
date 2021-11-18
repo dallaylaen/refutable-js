@@ -8,13 +8,16 @@ describe( 'parse', () => {
     it( 'can parse a simple snippet', done => {
         const report = parse( `
             r(
-                1. pass
-                !2. fail
+                !1. fail
                     ^ Condition equal failed at foo.js:42
                     - war
                     + peace
             )
         `);
+
+        expect( report.getDone() ).to.equal( true );
+        expect( report.getPass() ).to.equal( false );
+        expect( report.getCount() ).to.equal( 1 );
 
         console.log(report.getTap());
 
@@ -37,6 +40,8 @@ describe( 'parse', () => {
                 )
             )
         `);
+
+        expect( report.getGhost() ).to.equal( 'r(1,N,r(1))' );
 
         console.log(report.getTap());
 
