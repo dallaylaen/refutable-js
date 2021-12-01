@@ -9,7 +9,7 @@
     <h1>Refute.js playground</h1>
     This is a demo page of
     <a href="https://github.com/dallaylaen/refute-js">refute.js</a> project.
-    Edit code below, open your browser console, then press Run!
+    Edit code below, then press Run!
     <div id="cons" style="height: 10em; overflow:scroll"></div>
     <textarea rows="8" style="width: 100%" name="code" id="code"></textarea>
 <button onclick="return run()">Run!</button>
@@ -24,8 +24,10 @@
         container.scrollTop = canvas.offsetTop;
     };
 
+    const code = document.getElementById('code');
+
     function run() {
-        const src = document.getElementById('code').value;
+        const src = code.value;
         out( src, 'blue' );
         try {
             const action = Function('"use strict";return '+src)();
@@ -36,6 +38,14 @@
             out(e, 'red');
         };
     };
+
+    if (!code.value.match(/\S/))
+        code.value =
+`ok => {
+    ok.equal( 42, 137, 'life is fine' );
+    ok.deepEqual( { foo: [ 'bar', 1 ] }, { foo: [ 'bar', 2 ] } );
+    ok.equal( 2+2, 4, "at least something works" );
+}`;
 
     out("your output goes here", "green");
 </script>
