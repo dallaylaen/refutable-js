@@ -4,41 +4,40 @@
     <title>Refute.js playground</title>
     <link rel="shortcut icon" type="image/gif" href="favicon.ico">
     <script src="js/refute.js"></script>
-    <script src="js/3rd-party/jquery.js"></script>
 </head>
 <body>
-    <h1>Refute.js playground (here be dragons - yet!)</h1>
+    <h1>Refute.js playground</h1>
     This is a demo page of
     <a href="https://github.com/dallaylaen/refute-js">refute.js</a> project.
     Edit code below, open your browser console, then press Run!
-    <textarea rows="8" style="width: 100%" name="code" id="code">
-refute.config({ onFail: ok =&gt; console.log(ok.toString()) });
-    // default is to throw as error
-
-refute.addCondition(
-    'isPrime',
-    {args:1},
-    n =&gt; {
-        if (!Number.isInteger(n))
-            return 'not an integer';
-        for (let i = 2; i*i&lt;=n; i++) {
-            if (!(n%i)) return i+' divides '+n;
-        }
-    }
-);
-
-refute(ok=&gt;{
-    ok.equal('animal', 'animal', 'all animals are equal');
-    ok.match('earth', /art/, 'there\'s always a place for art');
-    ok.isPrime(2021, 'this is gonna be a simple year');
-});
-</textarea>
+    <div id="cons" style="height: 10em; overflow:scroll"></div>
+    <textarea rows="8" style="width: 100%" name="code" id="code"></textarea>
 <button onclick="return run()">Run!</button>
 <script>
-    function run() {
-        var src=$('#code').val();
-        eval(src);
+    function out(text, color='black') {
+        const canvas = document.createElement('pre');
+        canvas.style.color = color;
+        canvas.style.border = 'solid 1px red';
+        const container = document.getElementById('cons');
+        container.appendChild(canvas);
+        canvas.innerHTML = text; // TODO insecure
+        container.scrollTop = canvas.offsetTop;
     };
+
+    function run() {
+        const src = document.getElementById('code').value;
+        out( src, 'blue' );
+        try {
+            const action = Function('"use strict";return '+src)();
+            const report = new refute.Report();
+            action(report);
+            out( report.getText() );
+        } catch(e) {
+            out(e, 'red');
+        };
+    };
+
+    out("your output goes here", "green");
 </script>
 </body>
 </html>
