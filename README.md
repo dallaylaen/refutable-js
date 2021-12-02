@@ -1,6 +1,10 @@
 # refute.js
 
-Lightweight runtime assertion, testing, and contract programming tool.
+Lightweight runtime assertion and contract programming tool.
+
+# On the name
+
+Less is more; refutation is assertion.
 
 # Description
 
@@ -29,6 +33,8 @@ refute( ok => {
         ok.diag( 'conditions failed on input', input );
 });
 ```
+
+You can try it out at the [playground](https://dallaylaen.github.io/refute-js/).
 
 # How it works
 
