@@ -4,10 +4,10 @@ const expect = chai.expect;
 
 const refute = require( '../lib/refute.js' );
 
-describe( 'Report.map', () => {
+describe( 'Report.forEach', () => {
     it ( 'runs subtest', done => {
         const outer = new refute.Report();
-        outer.map('some array', [ 'foo42', 'bar137', 'foobar' ], (ok, item) => {
+        outer.forEach('some array', [ 'foo42', 'bar137', 'foobar' ], (ok, item) => {
             ok.match( item, /(.)\1/ );
             ok.match( item, /[a-z]+[0-9]+/ );
         });
