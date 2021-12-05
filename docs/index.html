@@ -36,6 +36,7 @@ for the <tt>ok</tt> object.
             const action = Function('"use strict";return '+src)();
             const report = new refute.Report();
             action(report);
+            report.done();
             out( report.getText() );
         } catch(e) {
             out(e, 'red');
