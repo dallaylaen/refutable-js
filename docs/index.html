@@ -17,10 +17,10 @@ for the <tt>ok</tt> object.
     <textarea rows="8" style="width: 100%" name="code" id="code"></textarea>
 <button onclick="return run()" style="width:100%; background-color: lime">Run!</button>
 <script>
-    function out(text, color='black') {
-        const canvas = document.createElement('pre');
-        canvas.style.color = color;
-        canvas.style.border = 'solid 1px red';
+    function out(text, opt={}) {
+        const canvas = document.createElement(opt.tag || 'pre');
+        canvas.style.color = opt.color || 'black';
+        canvas.style.border = 'dotted 1px '+(opt.color || 'black');
         const container = document.getElementById('cons');
         container.appendChild(canvas);
         canvas.innerHTML = text; // TODO insecure
@@ -28,15 +28,17 @@ for the <tt>ok</tt> object.
     };
 
     const code = document.getElementById('code');
+    const href = window.location.href.replace( /\?.*$/, '' );
 
     function run() {
         const src = code.value;
-        out( src, 'blue' );
+        out( src, {color:'gray'} );
+        out( '<a href="'+href+'?code='+encodeURIComponent(src)+'">code sample permalink</a>', { tag: 'div' } );
         try {
             const action = Function('"use strict";return '+src)();
             out( new refute.Report().run(action).done().getText() );
         } catch(e) {
-            out(e, 'red');
+            out(e, {color: 'red'});
         };
     };
 
@@ -64,7 +66,7 @@ for the <tt>ok</tt> object.
     ok.equal( 2+2, 4, "at least something works" );
 }`;
 
-    out("your output goes here", "green");
+    out("your output goes here", { color: "green" });
 </script>
 </body>
 </html>
