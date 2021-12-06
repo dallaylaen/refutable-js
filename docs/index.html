@@ -40,7 +40,23 @@ for the <tt>ok</tt> object.
         };
     };
 
-    if (!code.value.match(/\S/))
+    function getParams() {
+        // Somewhat ad hoc but it's javascript ^_^
+        const raw = window.location.search.substr(1) || '';
+        const out = {};
+        raw.split('&').forEach( pair => {
+            const [ name, value ] = pair.split('=');
+            if (value === undefined) return; // TODO die
+            out[name] = decodeURIComponent(value);
+        })
+        return out;
+    }
+
+    // TODO also store code in localstorage
+    const init = getParams().code;
+    if (init) {
+        code.value = init;
+    } else if (!code.value.match(/\S/))
         code.value =
 `ok => {
     ok.equal( 42, 137, 'life is fine' );
