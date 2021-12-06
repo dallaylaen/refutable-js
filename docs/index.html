@@ -33,7 +33,9 @@ for the <tt>ok</tt> object.
     function run() {
         const src = code.value;
         out( src, {color:'gray'} );
-        out( '<a href="'+href+'?code='+encodeURIComponent(src)+'">code sample permalink</a>', { tag: 'div' } );
+        const link = href+'?code='+encodeURIComponent(src);
+        out( '<a href="'+link+'" target="_blank">'
+            +'code sample permalink</a>', { tag: 'div' } );
         try {
             const action = Function('"use strict";return '+src)();
             out( new refute.Report().run(action).done().getText() );
