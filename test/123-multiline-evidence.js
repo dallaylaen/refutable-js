@@ -10,8 +10,7 @@ describe( 'Report.getText', () => {
         const text = rep.getText();
 
         expect( text ).to.match(
-            new RegExp("\n +\\^ foo\n +\\^ bar\n +\\^ baz\n[)]") );
-
+            new RegExp("\n +\\| foo\n +\\| bar\n +\\| baz\n[)]") );
 
         done();
     });

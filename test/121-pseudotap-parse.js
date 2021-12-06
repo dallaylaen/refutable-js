@@ -9,7 +9,7 @@ describe( 'parse', () => {
         const report = parse( `
             r(
                 !1. fail
-                    ^ Condition equal failed at foo.js:42
+                    ^ Condition \`equal\` failed at foo.js:42
                     - war
                     + peace
             )
@@ -30,7 +30,7 @@ describe( 'parse', () => {
             r(
                 1. pass
                 !2. fail
-                    ^ Condition equal failed as foo.js:42
+                    ^ Condition \`equal\` failed at foo.js:42
                     - war
                     + peace
                 3. nested
