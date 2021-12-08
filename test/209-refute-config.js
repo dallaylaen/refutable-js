@@ -9,12 +9,12 @@ describe( 'refute.config', () => {
         const contract = ok => { ok.fail() }; // always fails
         const trace = [];
         const laxRefute = refute.config(
-            { onFail: rep => trace.push( rep.getTap() ) }
+            { onFail: rep => trace.push( rep.getText() ) }
         );
         laxRefute( contract );
 
         expect( trace.length ).to.equal(1);
-        expect( trace[0] ).to.match(/1..1.*Failed/s);
+        expect( trace[0] ).to.match(/r\(\n *!1\./s);
 
         expect( () => refute(contract) ).to.throw( /1..1.*Failed/s );
 

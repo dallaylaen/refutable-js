@@ -19,10 +19,13 @@ describe( 'parse', () => {
         expect( report.getPass() ).to.equal( false );
         expect( report.getCount() ).to.equal( 1 );
 
-        console.log(report.getTap());
+        const details = report.getDetails(1);
+        expect( details.evidence ).to.deep.equal( [ '- war', '+ peace' ] );
+        expect( details.cond  ).to.equal( 'equal' );
+        expect( details.where ).to.equal( 'foo.js:42' );
+        expect( details.name  ).to.equal( 'fail' );
 
         done();
-
     });
 
     it( 'can parse a snippet', done => {
@@ -42,8 +45,7 @@ describe( 'parse', () => {
         `);
 
         expect( report.getGhost() ).to.equal( 'r(1,N,r(1))' );
-
-        console.log(report.getTap());
+        expect( report.getDone() ).to.equal( true );
 
         done();
     });

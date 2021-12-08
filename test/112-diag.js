@@ -10,32 +10,32 @@ describe( 'Report.info', () => {
         [
             'numeric value',
             [42],
-            '# 42',
+            '42',
         ],
         [
             'string value',
             [ "foo bared" ],
-            '# foo bared',
+            'foo bared',
         ],
         [
             'structure',
             [ [ 42, { foo: 137 }] ],
-            '# [42, {"foo":137}]'
+            '[42, {"foo":137}]'
         ],
         [
             'multiple args',
             [ "result is", 42, "arguments were", [ "foo", "bar" ] ],
-            '# result is 42 arguments were ["foo", "bar"]',
+            'result is 42 arguments were ["foo", "bar"]',
         ],
         [
             'missing value',
             [ "fetching", {foo:42}.bar ],
-            '# fetching <undef>',
+            'fetching <undef>',
         ],
         [
             'null, true, false',
             [ null, true, false ],
-            '# null true false',
+            'null true false',
         ],
     ];
 
@@ -43,7 +43,7 @@ describe( 'Report.info', () => {
         it (item[0], done => {
             const ok = new Report();
             ok.info(...item[1]);
-            expect( ok.getTap() ).to.equal( '1..0\n'+item[2]+'\n' );
+            expect( ok.getText() ).to.equal( 'r(\n    ; '+item[2]+'\n)' );
             done();
         });
     };

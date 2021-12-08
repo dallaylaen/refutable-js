@@ -38,7 +38,7 @@ describe( 'Report.ordered', () => {
     it ('can fail', done => {
         const ok = new refute.Report();
         ok.ordered( 'different', [42, 42, 137, 42], contract );
-        // console.log(ok.getTap());
+        // console.log(ok.getText());
 
         expect( ok.getGhost() ).to.equal( 'r(r(r(1),r(N),r(N)))' );
         expect( ok.getPass() ).to.equal(false);

@@ -172,12 +172,16 @@ describe( 'type', () => {
     for (let item of cases) {
         it( item[0], done => {
             const ok = refute.report( ok => {
-                ok.info( 'expecting '+(item[1] ? 'pass' : 'failure') );
+                ok.info(
+                    'expecting', item[2],
+                    (item[1] ? 'to be a' : 'not to be a'),
+                    item[3],
+                );
                 ok.type( item[2], item[3] );
             });
 
             if (ok.getPass() !== item[1])
-                throw new Error( ok.getTap() );
+                throw new Error( ok.getText() );
 
             if (item[4])
                 refute( ok.getDetails(1).evidence, item[4] );
