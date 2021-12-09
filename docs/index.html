@@ -38,7 +38,7 @@ for the <tt>ok</tt> object.
             +'code sample permalink</a>', { tag: 'div' } );
         try {
             const action = Function('"use strict";return '+src)();
-            out( new refute.Report().run(action).done().getText() );
+            new refute.Report().async(20000, action).then( x => out(x.done().getText()) );
         } catch(e) {
             out(e, {color: 'red'});
         };
