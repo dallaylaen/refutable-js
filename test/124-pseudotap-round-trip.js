@@ -27,6 +27,22 @@ describe( 'parse/getText tound trip', () => {
             )`,
             'r(1)',
         ],
+        [
+            'nested',
+            `r(
+                1. foo
+                r(
+                    1. fine
+                )
+                !2. bar
+                r(
+                    !1. nope
+                        ^ Condition \`foo\` failed at lol.js:42
+                        - wut wut
+                )
+            )`,
+            'r(r(1),r(N))'
+        ],
     ];
 
     for( let i of cases ) {
