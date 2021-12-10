@@ -413,33 +413,39 @@ class Report {
         if (this._info[0])
             out.push( ...this._info[0].map( pad(';') ) );
         for (let n = 1; n&lt;=this._count; n++) {
-            out.push(
-                indent
-                +(this._pending.has(n) ? '...' : (this._evidence[n] ? '!':'') )
-                +n+(this._descr[n] ? '. '+this._descr[n] : '.')
-            );
-            if( this._nested[n]) {
-                out.push( ...this._nested[n].getLines(indent) );
-            } else if( this._evidence[n] ) {
-                out.push( indent + '    ^ Condition `'+(this._condName[n] || 'check')
-                    +'` failed at '+this._where[n] );
-                this._evidence[n].forEach( raw => {
-                    // Handle multiline evidence
-                    // TODO this is perl written in JS, rewrite more clearly
-                    let[ _, prefix, s ] = raw.match( /^([-+|] )?(.*?)\n?$/s );
-                    if (!prefix) prefix = '| ';
-                    if (!s.match(/\n/)) {
-                        out.push( indent + '    ' + prefix + s );
-                    } else {
-                        s.split('\n').forEach(
-                            part => out.push( indent + '    ' + prefix + part ));
-                    };
-                });
-            };
+            out.push( ...this.getLinesPartial( n, indent ) );
             if (this._info[n])
                 out.push( ...this._info[n].map( pad(';') ) );
         };
         out.push(last);
+        return out;
+    }
+
+    getLinesPartial(n, indent='') {
+        const out = [];
+        out.push(
+            indent
+            +(this._pending.has(n) ? '...' : (this._evidence[n] ? '!':'') )
+            +n+(this._descr[n] ? '. '+this._descr[n] : '.')
+        );
+        if( this._nested[n]) {
+            out.push( ...this._nested[n].getLines(indent) );
+        } else if( this._evidence[n] ) {
+            out.push( indent + '    ^ Condition `'+(this._condName[n] || 'check')
+                +'` failed at '+this._where[n] );
+            this._evidence[n].forEach( raw => {
+                // Handle multiline evidence
+                // TODO this is perl written in JS, rewrite more clearly
+                let[ _, prefix, s ] = raw.match( /^([-+|] )?(.*?)\n?$/s );
+                if (!prefix) prefix = '| ';
+                if (!s.match(/\n/)) {
+                    out.push( indent + '    ' + prefix + s );
+                } else {
+                    s.split('\n').forEach(
+                        part => out.push( indent + '    ' + prefix + part ));
+                };
+            });
+        };
         return out;
     }
 
@@ -467,55 +473,8 @@ class Report {
     }
 
     toString() {
-        // TODO getText
-        return this.getTap();
-    }
-
-    /**
-     *  @desc Returns report stringified as TAP format
-     *  @returns {string}
-     */
-    getTap(n) {
-        const tap = n === undefined ? this.getTapLines() : this.getTapEntry(n);
-        tap.push('');
-        return tap.join('\n');
-    }
-
-    getTapLines(n) {
-        // TAP for now, use another format later because "perl is scary"
-        const tap = [ '1..'+this._count ];
-        // TODO info[0]
-        const preface = this.getDetails(0);
-        tap.push( ...preface.info.map( s => '# '+s ) );
-        for( let i = 1; i &lt;= this._count; i++ )
-            tap.push( ... this.getTapEntry(i) );
-        if (!this.getPass()) {
-            if (this.getCount() > 0)
-                tap.push('# Failed '+this.getFailCount()+'/'+this.getCount()+ ' conditions');
-            else
-                tap.push('# No checks were run, consider using pass() if that\'s deliberate');
-        };
-        return tap;
-    }
-
-    getTapEntry(n) {
-        const data = typeof(n) === 'object' ? n : this.getDetails(n);
-        const tap = [];
-        if (data.nested) {
-            tap.push( '# subcontract:'+(data.name?' '+data.name:'') );
-            tap.push( ... data.nested.getTapLines().map( s => '    '+s ));
-        }
-        if (data.pending) {
-            tap.push( 'pending '+data.n+' &lt;...>' );
-            return tap;
-        }
-        tap.push((data.pass?'':'not ') + 'ok ' + data.n
-            + (data.name ? ' - '+data.name : ''));
-        if (!data.pass)
-            tap.push('# Condition'+(data.cond ? ' '+data.cond : '')+' failed at '+data.where);
-        tap.push(...data.evidence.map(s=>'# '+s));
-        tap.push(...data.info.map(s=>'# '+s));
-        return tap;
+        // TODO do we really need getText anyway?
+        return this.getText();
     }
 
     /**
@@ -549,50 +508,6 @@ class Report {
             nested:   this._nested[n],
             pending:  this._pending.has(n),
         };
-    }
-
-    /**
-     *  @desc Convert report to an AssertionError (if available) or just Error.
-     *  @param {number} [n] Number of check to convert to exception.
-     *  Current error format is TAP, this may change in the future.
-     *  If 0 or unspecified, convert the whole report.
-     *  @param {object} [options]
-     *  @param {boolean} options.pass If false (the default), return nothing
-     *  if the report is passing.
-     *  @returns {Error|undefined}
-     */
-    getError(n, options={}) {
-        if (!n) {
-            // no entry given
-            if (!options.pass &amp;&amp; this.getPass())
-                return;
-
-            return makeError({
-                actual:   this.getTap(),
-                expected: '',
-                operator: 'contract',
-            });
-        };
-
-        const data = typeof n === 'object' ? n : this.getDetails(n);
-
-        // no error
-        if (!options.pass &amp;&amp; data.pass)
-            return;
-
-        return makeError({
-            actual:   this.getTapEntry(data).join('\n'),
-            expected: '',
-            message:  data.name,
-            operator: data.cond,
-        });
-    }
-
-    getThrown(n, options={}) {
-        // TODO rename to just throw?
-        const err = this.getError(n, options);
-        if (err)
-            throw err;
     }
 }
 
@@ -787,7 +702,7 @@ module.exports = { Report, addCondition, explain };
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Dec 10 2021 20:09:32 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Dec 10 2021 22:57:43 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
