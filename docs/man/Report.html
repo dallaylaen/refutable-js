@@ -356,7 +356,7 @@ about passing and failing conditions.</div>
     
 
     
-    <h4 class="name" id="async"><span class="type-signature"></span>async<span class="signature">(timeout, contract)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id="done"><span class="type-signature"></span>done<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Report.html">Report</a>}</span></h4>
     
 
     
@@ -364,9 +364,9 @@ about passing and failing conditions.</div>
 
 
 <div class="description">
-    Run a contract asynchronously with timeout.
- Returns a promise that will resolve when the contract finishes,
- passing along the contract object to then().
+    Locks the report object, so no modifications may be made later.
+  Also if onDone callback(s) are present, they are executed
+  unless there are pending async checks.
 </div>
 
 
@@ -375,78 +375,6 @@ about passing and failing conditions.</div>
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>timeout</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">integer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Promise will reject if timeout is reached.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>contract</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Contract">Contract</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">A function to pass Report object to.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -482,7 +410,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line103">line 103</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line236">line 236</a>
     </li></ul></dd>
     
 
@@ -510,6 +438,10 @@ about passing and failing conditions.</div>
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    this (chainable)
+</div>
+
 
 
 <dl>
@@ -518,7 +450,7 @@ about passing and failing conditions.</div>
     </dt>
     <dd>
         
-<span class="param-type">Promise</span>
+<span class="param-type"><a href="Report.html">Report</a></span>
 
 
     </dd>
@@ -588,7 +520,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line233">line 233</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line284">line 284</a>
     </li></ul></dd>
     
 
@@ -743,7 +675,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line442">line 442</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line498">line 498</a>
     </li></ul></dd>
     
 
@@ -804,6 +736,11 @@ about passing and failing conditions.</div>
 
 
 
+<div class="description">
+    Tells whether the report is finished,
+         i.e. done() was called & no pending async checks.
+</div>
+
 
 
 
@@ -845,7 +782,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line204">line 204</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line260">line 260</a>
     </li></ul></dd>
     
 
@@ -1097,7 +1034,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line480">line 480</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line536">line 536</a>
     </li></ul></dd>
     
 
@@ -1206,7 +1143,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line250">line 250</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line301">line 301</a>
     </li></ul></dd>
     
 
@@ -1316,7 +1253,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line274">line 274</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line325">line 325</a>
     </li></ul></dd>
     
 
@@ -1494,7 +1431,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line223">line 223</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line274">line 274</a>
     </li></ul></dd>
     
 
@@ -1600,7 +1537,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line394">line 394</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line450">line 450</a>
     </li></ul></dd>
     
 
@@ -1710,7 +1647,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line322">line 322</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line373">line 373</a>
     </li></ul></dd>
     
 
@@ -1908,7 +1845,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line182">line 182</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line222">line 222</a>
     </li></ul></dd>
     
 
@@ -2019,7 +1956,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line242">line 242</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line293">line 293</a>
     </li></ul></dd>
     
 
@@ -2239,6 +2176,172 @@ Non-string values will be stringified via explain().
     
 
     
+    <h4 class="name" id="onFail"><span class="type-signature"></span>onFail<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="Report.html">Report</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Execute code when contract execution finishes, if it failed.
+  Report object cannot be modified at this point,
+  and no additional checks my be present.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">first argument is report in question</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line76">line 76</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    this (chainable)
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Report.html">Report</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>report.onFail( r => console.log(r.getText()) );</code></pre>
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="run"><span class="type-signature"></span>run<span class="signature">(contract)</span><span class="type-signature"> &rarr; {<a href="Report.html">Report</a>}</span></h4>
     
 
@@ -2247,8 +2350,11 @@ Non-string values will be stringified via explain().
 
 
 <div class="description">
-    apply given function to a Report object.
-  Multiple contracts can be chained over the same object.
+    apply given function to a Report object, lock report afterwards.
+  If function is async (i.e. returns a Promise),
+  the report will only be done() after the promise resolves.
+  This is done so to ensure that all checks that await on a value
+  are resolved.
 </div>
 
 
@@ -2300,7 +2406,7 @@ Non-string values will be stringified via explain().
 
             
 
-            <td class="description last">The function to execute.
+            <td class="description last">The function to execute
   Additional parameters may be _prepended_ to contract
   and will be passed to it _after_ the Report object in question.</td>
         </tr>
@@ -2343,7 +2449,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line85">line 85</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line123">line 123</a>
     </li></ul></dd>
     
 
@@ -2396,18 +2502,209 @@ Non-string values will be stringified via explain().
 
     <h5>Examples</h5>
     
-    <pre class="prettyprint"><code>// The basic usage
-  new Report().run( ok => ok.equal( 'war', 'peace', '1984' ) );
+    <pre class="prettyprint"><code>Basic usage
+  const r = new Report().run( ok => ok.equal( 'war', 'peace', '1984' ) );
+  r.getPass(); // false
+  r.getDone(); // true
+  r.getText();
+  r(
+     !1. 1984
+     - war
+     + peace
+  )
+
   </code></pre>
 
-    <pre class="prettyprint"><code>// Passing additional args
+    <pre class="prettyprint"><code>Passing additional arguments to callback.
   // The contract body is the last argument.
   new Report().run( { v: 4.2, colors: [ 'blue' ] }, (r, arg) => {
       r.type( arg, 'object' );
       r.type( arg.v, 'number' );
       r.numCmp( arg.v, '>=', 3.14 );
       r.type( arg.colors, 'array' );
-  });</code></pre>
+  });
+  </code></pre>
+
+    <pre class="prettyprint"><code>Async function
+  const r = new Report().run(
+      async ok => ok.equal( await 6*9, 42, 'fails but later' ) );
+  r.getPass(); // true
+  r.getDone(); // false
+  // ...wait for event loop to tick
+  r.getPass(); // false
+  r.getDone(); // true</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="runSync"><span class="type-signature"></span>runSync<span class="signature">(contract)</span><span class="type-signature"> &rarr; {<a href="Report.html">Report</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    apply given function (contract) to a Report object.
+  Multiple such contrats may be applied, and the report is not locked.
+  Async function are permitted but may not behave as expected.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>contract</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Contract">Contract</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The function to execute
+  Additional parameters may be _prepended_ to contract
+  and will be passed to it _after_ the Report object in question.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line151">line 151</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    this (chainable)
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Report.html">Report</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>Basic usage
+  const r = new Report()
+      .runSync( ok => ok.equal( 'war', 'peace', '1984' ) )
+      .runSync( ok => ok.type ( [], 'array', 'some more checks' ) )
+      .done();</code></pre>
 
 
 
@@ -2469,7 +2766,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line367">line 367</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line422">line 422</a>
     </li></ul></dd>
     
 
@@ -2539,7 +2836,7 @@ Non-string values will be stringified via explain().
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 05 2021 09:03:16 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Dec 10 2021 20:09:32 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
