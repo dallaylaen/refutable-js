@@ -83,9 +83,9 @@ describe( 'Report', () => {
         inner.done();
 
         // check that pending tests are reflected in TAP
-        // console.log( outer.getTap() );
-        expect( outer.getTap() ).to.match( new RegExp('^pending 2', 'm') );
-        expect( outer.getTap() ).to.match( new RegExp('^  +pending 3', 'm') );
+        // console.log( outer.getText() );
+        expect( outer.getText() ).to.match( new RegExp('^    \.\.\.2', 'm') );
+        expect( outer.getText() ).to.match( new RegExp('^        \.\.\.3\.', 'm') );
 
         setTimeout( () => { // let the event loop tick once
             // TODO check file & line attribution - must be _this_ file
