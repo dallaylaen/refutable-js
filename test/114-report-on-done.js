@@ -96,5 +96,30 @@ describe( 'Report', () => {
             done();
         }, 0);
     });
+
+    it( 'executes callbacks in reverse order', done => {
+        const rep = new Report();
+        const trace = [];
+        rep.onDone( () => trace.push(1) );
+        rep.onDone( () => trace.push(2) );
+        rep.done();
+        expect( trace ).to.deep.equal( [2,1] );
+        done();
+    });
+    it( 'executes callbacks in reverse order (async)', done => {
+        const rep = new Report();
+        const trace = [];
+        rep.onDone( () => trace.push(1) );
+        rep.onDone( () => trace.push(2) );
+        rep.check( Promise.resolve(0), 'delayed' )
+        rep.done();
+        expect( trace ).to.deep.equal( [] ); // not yet
+
+        setTimeout( () => {
+            expect( rep.getDone() ).to.equal( true );
+            expect( trace ).to.deep.equal( [2,1] );
+            done();
+        }, 0);
+    });
 });
 
