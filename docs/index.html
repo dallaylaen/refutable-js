@@ -10,7 +10,7 @@
     This is a demo page of
     <a href="https://github.com/dallaylaen/refute-js">refute.js</a> project.
     Edit code below, then press Run!
-    <div id="cons" style="height: 10em; overflow:scroll"></div>
+    <div id="cons" style="height: 10em; overflow:scroll; resize:vertical"></div>
     See <a href="man/conditions.html">conditions</a> reference for how
 to query the data/code. See <a href="man/Report.html">Report</a> reference
 for the <tt>ok</tt> object.
@@ -68,7 +68,11 @@ for the <tt>ok</tt> object.
     ok.equal( 2+2, 4, "at least something works" );
 }`;
 
-    out("your output goes here", { color: "green" });
+    out(
+        "Your output goes here. "
+        +"Use <tt>out(text, { color: color });</tt> to display data if needed.",
+        { color: "green", tag: 'span' }
+    );
 </script>
 </body>
 </html>
