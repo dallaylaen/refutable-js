@@ -18,7 +18,7 @@ describe( 'refute()', () => {
             refute( ok => {
                 ok.equal( 'freedom', 'slavery' );
             });
-        } ).to.throw( /1..1.*Failed/s );
+        } ).to.throw( /r\(\n *!1\.\n.*\)/s );
 
         done();
     });
