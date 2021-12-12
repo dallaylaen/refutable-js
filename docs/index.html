@@ -31,18 +31,17 @@ for the <tt>ok</tt> object.
     const href = window.location.href.replace( /\?.*$/, '' );
 
     function run() {
-        const src = code.value;
+        const src = code.value.replace( /^\s*(\S)/s, (_,c)=>c );
         out( src, {color:'gray'} );
         const link = href+'?code='+encodeURIComponent(src);
         out( '<a href="'+link+'" target="_blank">'
             +'code sample permalink</a>', { tag: 'div' } );
-        try {
+        new Promise( done => {
             const action = Function('"use strict";return '+src)();
-            new Promise( done => done(new refute.Report().run(action)) )
-                .then( x => out(x.getText()) );
-        } catch(e) {
-            out(e, {color: 'red'});
-        };
+            done(new refute.Report().run(action));
+        })
+            .then( x => out(x.getText()) )
+            .catch( err => out(err, {color: 'red'}));
     };
 
     function getParams() {
