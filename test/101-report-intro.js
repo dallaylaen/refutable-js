@@ -46,12 +46,12 @@ describe( 'Report', () => {
         done();
     });
 
-    it( 'fails when empty', done => {
+    it( 'passes when empty', done => {
         const ok = new Report();
         ok.done();
         expect( ok.getCount() ).to.equal( 0 );
-        expect( ok.getPass() ).to.equal( false );
-        expect( ok.getGhost() ).to.equal( 'r(Z)' );
+        expect( ok.getPass() ).to.equal( true );
+        expect( ok.getGhost() ).to.equal( 'r()' );
         done();
     });
 });
