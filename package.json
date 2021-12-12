@@ -8,7 +8,7 @@
     "url": "https://github.com/dallaylaen/refute-js.git"
   },
   "scripts": {
-    "test": "nyc mocha && browserify lib/refute.js -d -o docs/js/refute.js"
+    "test": "nyc mocha && ./browserify.sh"
   },
   "eslintConfig":{
     "env":{
