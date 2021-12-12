@@ -1,6 +1,6 @@
 #!/bin/sh
 
-AUTOFILES="docs/js/refute.js"
+AUTOFILES="docs/js/refute.js docs/js/refute.min.js docs/man"
 
 modified() {
     git status --porcelain -- "$@" | grep -q '^'
