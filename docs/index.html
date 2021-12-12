@@ -40,7 +40,7 @@ for the <tt>ok</tt> object.
             const action = Function('"use strict";return '+src)();
             done(new refute.Report().run(action));
         })
-            .then( x => out(x.getText()) )
+            .then( x => out(x.roString()) )
             .catch( err => out(err, {color: 'red'}));
     };
 
