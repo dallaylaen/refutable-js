@@ -39,11 +39,11 @@ describe( 'explain', () => {
     });
 
     it ('handles depth', done => {
-        expect( explain( [[[]]], 1 ) ).to.equal('[[...]]');
-        expect( explain( [[[]]], 2 ) ).to.equal('[[[...]]]');
-        expect( explain( [[[]]], 3 ) ).to.equal('[[[]]]');
+        expect( explain( [[[]]], {depth:1}) ).to.equal('[[...]]');
+        expect( explain( [[[]]], {depth:2}) ).to.equal('[[[...]]]');
+        expect( explain( [[[]]], {depth:3}) ).to.equal('[[[]]]');
 
-        expect( explain( { foo: { bar: {quux: 42 }, x: 137 }, f:3.14 }, 2 ) )
+        expect( explain( { foo: { bar: {quux: 42 }, x: 137 }, f:3.14 }, {depth:2}) )
             .to.equal('{"f":3.14, "foo":{"bar":{...}, "x":137}}');
 
         done();
@@ -93,7 +93,7 @@ describe( 'explain', () => {
         right.push( [left] );
         const butterfly = [ { left }, { right } ];
 
-        const str = explain( butterfly, 20 );
+        const str = explain( butterfly, {depth:20} );
         expect( str ).to.match( /\[ Circular=\$\[0\]\["left"\] \]/ );
         expect( str ).to.match( /\[ Circular=\$\[1\]\["right"\] \]/ );
 
