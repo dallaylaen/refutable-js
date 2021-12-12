@@ -9,7 +9,7 @@ describe( 'refute.config', () => {
         const contract = ok => { ok.fail() }; // always fails
         const trace = [];
         const laxRefute = refute.config(
-            { onFail: rep => trace.push( rep.getText() ) }
+            { onFail: rep => trace.push( rep.toString() ) }
         );
         laxRefute( contract );
 

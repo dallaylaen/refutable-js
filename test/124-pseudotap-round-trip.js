@@ -2,7 +2,7 @@
 const { expect } = require( 'chai' );
 const { parse  } = require( '../lib/refute/parse.js' );
 
-describe( 'parse/getText tound trip', () => {
+describe( 'parse/toString tound trip', () => {
     const cases = [
         // [ name, text, ghost, extraChecks() ]
         [
@@ -56,7 +56,7 @@ describe( 'parse/getText tound trip', () => {
             if (i[3])
                 i[3]( r, text );
             expect( r.getGhost() ).to.equal(i[2]);
-            expect( r.getText() ).to.equal(text);
+            expect( r.toString() ).to.equal(text);
             done();
         });
     }

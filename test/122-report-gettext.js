@@ -17,7 +17,7 @@ describe( 'Report+parse', () => {
             });
         });
 
-        const text = rep.getText();
+        const text = rep.toString();
         // console.log(text);
 
         expect( text ).to.match(/r\(.*\)/s);
@@ -25,7 +25,7 @@ describe( 'Report+parse', () => {
         expect( text ).to.match(/^ *!2\./m);
 
 
-        const text2 = parse(text).getText();
+        const text2 = parse(text).toString();
 
         expect( text2 ).to.equal( text );
 

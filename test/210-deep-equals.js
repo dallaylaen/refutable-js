@@ -149,7 +149,7 @@ describe( 'deepEqual', () => {
             });
 
             if (ok.getPass() !== item[1])
-                throw new Error( ok.getText() );
+                throw new Error( ok.toString() );
 
             // contract for output
             refute( ok.getDetails(1).evidence, (ok, data) => {

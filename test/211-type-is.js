@@ -181,7 +181,7 @@ describe( 'type', () => {
             });
 
             if (ok.getPass() !== item[1])
-                throw new Error( ok.getText() );
+                throw new Error( ok.toString() );
 
             if (item[4])
                 refute( ok.getDetails(1).evidence, item[4] );
