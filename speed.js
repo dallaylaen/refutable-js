@@ -11,7 +11,7 @@ for (let i = 0; i < runs; i++) {
         for (let j = 0; j < checks; j++) {
             ok.match( j, /\d+/, 'j is a number' );
         };
-        ok.getTap();
+        ok.toString();
     });
 };
 
