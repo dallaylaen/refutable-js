@@ -49,7 +49,9 @@ describe( 'parse/toString tound trip', () => {
         it( i[0], done => {
             // trim indentation
             const [ _, indent ] = i[1].match( new RegExp('\\n( *)\\)$', 's') );
-            const text = i[1].replace( new RegExp( '^'+indent, 'mg' ), '' );
+            const text =
+                'refute/'+parse.version+'\n'
+                +i[1].replace( new RegExp( '^'+indent, 'mg' ), '' );
 
             // generate report
             const r = parse( text );

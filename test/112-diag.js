@@ -43,7 +43,7 @@ describe( 'Report.info', () => {
         it (item[0], done => {
             const ok = new Report();
             ok.info(...item[1]);
-            expect( ok.toString() ).to.equal( 'r(\n    ; '+item[2]+'\n)' );
+            expect( ok.toString() ).to.equal( 'refute/'+Report.version+'\nr(\n    ; '+item[2]+'\n)' );
             done();
         });
     };
