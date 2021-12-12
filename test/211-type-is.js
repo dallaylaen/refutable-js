@@ -65,7 +65,7 @@ describe( 'type', () => {
                 ok.equal( info[0], '- {}', 'what we got' );
                 ok.match( info[1], /^\+ /, 'what we expected');
                 ok.match( info[1], /Report/, 'Report class mentioned' );
-                ok.numCmp( info[1].length, '<', 100, 'does not insert the whole class there');
+                ok.cmpNum( info[1].length, '<', 100, 'does not insert the whole class there');
             }
         ],
         [
