@@ -10,14 +10,14 @@
   "scripts": {
     "test": "nyc mocha && ./browserify.sh"
   },
-  "eslintConfig":{
-    "env":{
-      "es6":true,
-      "browser":true,
-      "node":true
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "browser": true,
+      "node": true
     },
-    "parserOptions":{
-      "ecmaVersion":2020
+    "parserOptions": {
+      "ecmaVersion": 2020
     }
   },
   "keywords": [
@@ -26,5 +26,12 @@
     "contract programming"
   ],
   "author": "Konstantin Uvarin <khedin@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "eslint": "^8.4.1",
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0",
+    "webpack": "^5.65.0"
+  }
 }
