@@ -50,7 +50,7 @@ describe( 'parse/toString tound trip', () => {
             // trim indentation
             const [ _, indent ] = i[1].match( new RegExp('\\n( *)\\)$', 's') );
             const text =
-                'refute/'+parse.version+'\n'
+                'refute/'+parse.protocol+'\n'
                 +i[1].replace( new RegExp( '^'+indent, 'mg' ), '' );
 
             // generate report

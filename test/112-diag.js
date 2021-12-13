@@ -1,7 +1,5 @@
 'use strict';
-const chai = require('chai');
-const expect = chai.expect;
-
+const { expect } = require('chai');
 const { Report } = require( '../lib/refute/report.js' );
 
 describe( 'Report.info', () => {
@@ -43,7 +41,7 @@ describe( 'Report.info', () => {
         it (item[0], done => {
             const ok = new Report();
             ok.info(...item[1]);
-            expect( ok.toString() ).to.equal( 'refute/'+Report.version+'\nr(\n    ; '+item[2]+'\n)' );
+            expect( ok.toString() ).to.equal( 'refute/'+Report.protocol+'\nr(\n    ; '+item[2]+'\n)' );
             done();
         });
     };
