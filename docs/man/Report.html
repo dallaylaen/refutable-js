@@ -30,7 +30,7 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>Report<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">The core of the refute library, the report object contains info
+            <div class="class-description">The core of the refute-contract library, the report object contains info
 about passing and failing conditions.</div>
         
     
@@ -100,7 +100,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line26">line 26</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -149,206 +149,6 @@ about passing and failing conditions.</div>
 
     
         <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".explain"><span class="type-signature">(static) </span>explain<span class="signature">(target, depth)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Stringiry objects recursively with limited depth
- and circular reference tracking.
- Generally JSON.stringify is used as reference:
- strings are escaped and double-quoted; numbers, boolean, and nulls are
- stringified "as is"; objects and arrays are descended into.
- The differences follow:
- undefined is reported as '<undef>'.
- Objects that have constructors are prefixed with class names.
- Object and array content is abbreviated as "..." and "Circular"
- in case of depth exhaustion and circular reference, respectively.
- Functions are naively stringified.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>target</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Any</span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Object to serialize.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>depth</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">integer</span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                    3
-                
-                </td>
-            
-
-            <td class="description last">Depth limit.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_util.js.html">refute/util.js</a>, <a href="refute_util.js.html#line49">line 49</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
 
         
             
@@ -410,7 +210,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line236">line 236</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line238">line 238</a>
     </li></ul></dd>
     
 
@@ -451,6 +251,243 @@ about passing and failing conditions.</div>
     <dd>
         
 <span class="param-type"><a href="Report.html">Report</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="explain"><span class="type-signature"></span>explain<span class="signature">(target, options)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Stringify objects recursively with limited depth
+ and circular reference tracking.
+ Generally JSON.stringify is used as reference:
+ strings are escaped and double-quoted; numbers, boolean, and nulls are
+ stringified "as is"; objects and arrays are descended into.
+ The differences follow:
+ undefined is reported as '<undef>'.
+ Objects that have constructors are prefixed with class names.
+ Object and array content is abbreviated as "..." and "Circular"
+ in case of depth exhaustion and circular reference, respectively.
+ Functions are naively stringified.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Thingy to serialize.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>depth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">How many levels to descend. Default = 3.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="refute_util.js.html">refute/util.js</a>, <a href="refute_util.js.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
 
 
     </dd>
@@ -520,7 +557,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line284">line 284</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line286">line 286</a>
     </li></ul></dd>
     
 
@@ -675,7 +712,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line457">line 457</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line452">line 452</a>
     </li></ul></dd>
     
 
@@ -782,7 +819,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line260">line 260</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line262">line 262</a>
     </li></ul></dd>
     
 
@@ -888,7 +925,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line301">line 301</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line303">line 303</a>
     </li></ul></dd>
     
 
@@ -954,7 +991,7 @@ about passing and failing conditions.</div>
   This may be useful for validating custom conditions.
   Consecutive passing checka are represented by numbers.
   A capital letter in the string represents failure.
-  See also <a href="Report.html#getText">getText()</a>
+  See also <a href="Report.html#toString">toString()</a>
 </div>
 
 
@@ -998,7 +1035,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line325">line 325</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line327">line 327</a>
     </li></ul></dd>
     
 
@@ -1176,7 +1213,7 @@ about passing and failing conditions.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line274">line 274</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line276">line 276</a>
     </li></ul></dd>
     
 
@@ -1221,146 +1258,6 @@ about passing and failing conditions.</div>
     
 
 
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="getText"><span class="type-signature"></span>getText<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Returns serialized diff-like report with nesting and indentation.
- Passing conditions are merked with numbers, failing are prefixed
- with a bang (!).
-
- See also <a href="Report.html#getGhost">getGhost()</a>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line373">line 373</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>// no checks run
- const r = new Report();
- r.getText();
- r(
- )
- </code></pre>
-
-    <pre class="prettyprint"><code>// pass
- const r = new Report();
- r.pass('foo bared');
- r.getText();
- r(
-     1. foo bared
- )
- </code></pre>
-
-    <pre class="prettyprint"><code>// fail
- const r = new Report();
- r.equal('war', 'peace');
- r.getText();
- r(
-     !1.
-     ^ Condition equal failed at &lt;file>:&lt;line>:&lt;char>
-     - war
-     + peace
- )</code></pre>
 
 
 
@@ -1484,7 +1381,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line222">line 222</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line224">line 224</a>
     </li></ul></dd>
     
 
@@ -1595,7 +1492,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line293">line 293</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line295">line 295</a>
     </li></ul></dd>
     
 
@@ -1752,7 +1649,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line59">line 59</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -1805,7 +1702,7 @@ Non-string values will be stringified via explain().
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>report.onDone( r => { if (!r.getPass()) console.log(r.getText()) } )</code></pre>
+    <pre class="prettyprint"><code>report.onDone( r => { if (!r.getPass()) console.log(r.toString()) } )</code></pre>
 
 
 
@@ -1918,7 +1815,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line76">line 76</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -1971,7 +1868,7 @@ Non-string values will be stringified via explain().
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>report.onFail( r => console.log(r.getText()) );</code></pre>
+    <pre class="prettyprint"><code>report.onFail( r => console.log(r.toString()) );</code></pre>
 
 
 
@@ -2088,7 +1985,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line123">line 123</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line125">line 125</a>
     </li></ul></dd>
     
 
@@ -2145,7 +2042,7 @@ Non-string values will be stringified via explain().
   const r = new Report().run( ok => ok.equal( 'war', 'peace', '1984' ) );
   r.getPass(); // false
   r.getDone(); // true
-  r.getText();
+  r.toString();
   r(
      !1. 1984
      - war
@@ -2159,7 +2056,7 @@ Non-string values will be stringified via explain().
   new Report().run( { v: 4.2, colors: [ 'blue' ] }, (r, arg) => {
       r.type( arg, 'object' );
       r.type( arg.v, 'number' );
-      r.numCmp( arg.v, '>=', 3.14 );
+      r.cmpNum( arg.v, '>=', 3.14 );
       r.type( arg.colors, 'array' );
   });
   </code></pre>
@@ -2286,7 +2183,7 @@ Non-string values will be stringified via explain().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line151">line 151</a>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line153">line 153</a>
     </li></ul></dd>
     
 
@@ -2454,6 +2351,146 @@ Non-string values will be stringified via explain().
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns serialized diff-like report with nesting and indentation.
+ Passing conditions are merked with numbers, failing are prefixed
+ with a bang (!).
+
+ See also <a href="Report.html#getGhost">getGhost()</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="refute_report.js.html">refute/report.js</a>, <a href="refute_report.js.html#line373">line 373</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>// no checks run
+ const r = new Report();
+ r.toString();
+ r(
+ )
+ </code></pre>
+
+    <pre class="prettyprint"><code>// pass
+ const r = new Report();
+ r.pass('foo bared');
+ r.toString();
+ r(
+     1. foo bared
+ )
+ </code></pre>
+
+    <pre class="prettyprint"><code>// fail
+ const r = new Report();
+ r.equal('war', 'peace');
+ r.toString();
+ r(
+     !1.
+     ^ Condition equal failed at &lt;file>:&lt;line>:&lt;char>
+     - war
+     + peace
+ )</code></pre>
+
+
+
+        
     
 
     
@@ -2475,7 +2512,7 @@ Non-string values will be stringified via explain().
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Dec 10 2021 22:57:43 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Dec 17 2021 22:30:15 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
