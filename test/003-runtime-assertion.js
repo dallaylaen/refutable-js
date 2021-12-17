@@ -3,7 +3,7 @@ const chai = require('chai');
 const should = chai.should();
 const expect = chai.expect;
 
-const refute = require( '../lib/refute.js' );
+const refute = require( '../lib/index.js' );
 
 describe( 'refute()', () => {
     it ('can pass', done => {

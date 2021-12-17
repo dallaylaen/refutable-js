@@ -2,7 +2,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const refute = require( '../lib/refute.js' );
+const refute = require( '../lib/index.js' );
 
 describe( 'Report.forEach', () => {
     it ( 'runs subtest', done => {

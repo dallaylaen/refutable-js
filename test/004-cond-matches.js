@@ -1,7 +1,7 @@
 'use strict';
 const { expect } = require('chai');
 
-const refute = require( '../lib/refute.js' );
+const refute = require( '../lib/index.js' );
 
 describe( 'Report.match', () => {
     const report = refute.report( ok => {

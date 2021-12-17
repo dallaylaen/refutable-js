@@ -1,7 +1,7 @@
 'use strict';
 const { expect } = require( 'chai' );
 
-const { Report } = require ( '../lib/refute.js' );
+const { Report } = require ( '../lib/index.js' );
 
 describe( 'Report(async)', () => {
     it( 'can handle Promise as evidence', done => {

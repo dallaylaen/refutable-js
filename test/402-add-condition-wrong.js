@@ -1,6 +1,6 @@
 'use strict';
 const { expect } = require( 'chai' );
-const { addCondition } = require( '../lib/refute.js' );
+const { addCondition } = require( '../lib/index.js' );
 
 describe( 'addCondition errors', () => {
     it( 'forbids bad args', done => {
