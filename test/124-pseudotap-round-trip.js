@@ -1,6 +1,6 @@
 'use strict';
 const { expect } = require( 'chai' );
-const { parse  } = require( '../lib/refute/parse.js' );
+const { parse  } = require( '../lib/parse.js' );
 
 describe( 'parse/toString tound trip', () => {
     const cases = [

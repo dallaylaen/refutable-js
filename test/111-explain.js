@@ -2,7 +2,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const { explain } = require( '../lib/refute/report.js' );
+const { explain } = require( '../lib/report.js' );
 
 describe( 'explain', () => {
     class Foo {

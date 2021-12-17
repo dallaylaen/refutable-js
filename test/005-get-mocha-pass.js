@@ -1,4 +1,4 @@
-const { refuteUnit } = require( '../lib/refute/mocha.js' );
+const { refuteUnit } = require( '../lib/mocha.js' );
 
 refuteUnit( 'refuteUnit', ok=>{
     ok.pass('passing test');

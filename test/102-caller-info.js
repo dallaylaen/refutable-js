@@ -1,6 +1,6 @@
 'use strict';
 const { expect } = require( 'chai' );
-const { callerInfo } = require( '../lib/refute/util.js' );
+const { callerInfo } = require( '../lib/util.js' );
 
 /**
  *  Fragile test, handle with care

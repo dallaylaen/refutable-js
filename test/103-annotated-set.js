@@ -1,7 +1,7 @@
 'use strict';
 const { expect } = require( 'chai' );
 
-const { AnnotatedSet } = require( '../lib/refute/util/annotated-set.js' );
+const { AnnotatedSet } = require( '../lib/util/annotated-set.js' );
 
 describe( 'AnnotatedSet', () => {
     it ( 'can store & search data', done => {

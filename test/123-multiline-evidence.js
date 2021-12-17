@@ -1,7 +1,7 @@
 'use strict';
 
 const { expect } = require( 'chai' );
-const { Report } = require( '../lib/refute/report.js' );
+const { Report } = require( '../lib/report.js' );
 
 describe( 'Report.toString', () => {
     it( 'hanles multiline evidence', done => {

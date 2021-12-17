@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 
-const { parse } = require('../lib/refute/parse.js');
+const { parse } = require('../lib/parse.js');
 
 describe( 'parse', () => {
     it( 'can parse a simple snippet', done => {

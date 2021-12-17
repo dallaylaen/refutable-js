@@ -1,7 +1,7 @@
 'use strict';
 const { expect } = require('chai');
 
-const { Report } = require( '../lib/refute/report.js' );
+const { Report } = require( '../lib/report.js' );
 
 function where() {
     return new Error("probe").stack.split('\n')[2].match( /([^()\s:]+:\d+)/ )[0];

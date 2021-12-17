@@ -1,10 +1,10 @@
 'use strict';
 
 const { expect } = require( 'chai' );
-const { Report } = require( '../lib/refute/report.js' );
-const { parse }  = require( '../lib/refute/parse.js' );
+const { Report } = require( '../lib/report.js' );
+const { parse }  = require( '../lib/parse.js' );
 
-const unused = require( '../lib/refute/cond/deep.js' );
+const unused = require( '../lib/cond/deep.js' );
 
 describe( 'Report+parse', () => {
     it( 'can generate a summary', done => {
