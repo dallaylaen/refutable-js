@@ -1,8 +1,8 @@
 {
   "name": "refute",
   "version": "1.0.0",
-  "description": "A runtime assertion, testing, and contract programming tool",
-  "main": "refute.js",
+  "description": "A runtime assertion and contract programming tool",
+  "main": "lib/refute.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/dallaylaen/refute-js.git"
