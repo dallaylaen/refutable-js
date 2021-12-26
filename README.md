@@ -16,7 +16,7 @@ a log message, an exception (the default), or even calling back home.
 * Condition blocks can be nested.
 * New conditions can be created.
 * Reasonably fast, heavily optimized for passing checks
-(check [example/example/speed.js](example/speed.js).
+(check [example/speed.js](example/speed.js)).
 
 ## Example
 
