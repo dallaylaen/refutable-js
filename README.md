@@ -5,12 +5,18 @@ programming tool.
 It performs blocks of condition checks and notifies the user should
 some of the checks fail.
 
-Unlike similar solutions, including the stock
-[assert](https://nodejs.org/api/assert.html) module,
-it won't short-circuit on the first failing condition.
-Instead, a detailed report is generated and a configurable callback is executed,
-which may throw an exception (the default), print to console,
-or even send a report back home if the application is being run in a browser.
+* Usable in both a standalone app or a browser.
+The compressed download size in <10kB.
+* Produces a detailed human- and machine-readable report.
+* Executes the contract to the end, not short-circuiting on the first failure
+like other solutions including
+stock [assert](https://nodejs.org/api/assert.html) module would do.
+* Of failure, a customizable action is performed which may be
+a log message, an exception (the default), or even calling back home.
+* Condition blocks can be nested.
+* New conditions can be created.
+* Reasonably fast, heavily optimized for passing checks
+(check [example/example/speed.js](example/speed.js).
 
 ## Example
 
@@ -31,17 +37,59 @@ const order = {
 refute (r=>{
     r.type( order.version, 'number', 'a numeric version is included' );
     r.equal( order.total, order.price + order.tax, 'money adds up' );
-    r.matches( name, /\w/, 'the only assumption to be made about a name' );
+    r.match( order.name, /\w/, 'the only assumption to be made about a name' );
     r.forEach( 'check items in the cart', order.cart, (inner, item) => {
         inner.type( item.id, 'integer', 'items should have ids' );
         inner.type( item.qty, 'integer', 'number of items is whole' );
-        inner.numCmp( item.qty, '>', 0, 'at least one item bought' );
+        inner.cmpNum( item.qty, '>', 0, 'at least one item bought' );
     });
 });
 ```
 
 _Note that while we use data validation in this example, nothing prevents
 us from accessing other data or even executing functions inside contracts._
+
+The report produced:
+
+```
+Uncaught Error: refute/1.1
+r(
+    1. a numeric version is included
+    !2. money adds up
+        ^ Condition `equal` failed at REPL23:3:7
+        - 10.28
+        + 10.27
+    !3. the only assumption to be made about a name
+        ^ Condition `match` failed at REPL23:4:7
+        | undefined
+        | Does not match : /\w/
+    !4. check items in the cart
+    r(
+        1. item 0
+        r(
+            1. items should have ids
+            2. number of items is whole
+            3. at least one item bought
+        )
+        !2. item 1
+        r(
+            1. items should have ids
+            2. number of items is whole
+            !3. at least one item bought
+                ^ Condition `cmpNum` failed at REPL23:8:15
+                | 0
+                | is not >
+                | 0
+        )
+        3. item 2
+        r(
+            1. items should have ids
+            2. number of items is whole
+            3. at least one item bought
+        )
+    )
+)
+```
 
 ## Naming
 
