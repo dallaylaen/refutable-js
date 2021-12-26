@@ -1,8 +1,11 @@
+# npm-specific
+aux
+docs
+# the rest is copy-and-paste from .gitignore
 .*.sw[pon]
 .nyc*
 coverage
 node_modules
 out
 *.skip
-aux
-docs
+*.skip.*
