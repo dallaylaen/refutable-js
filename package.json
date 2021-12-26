@@ -1,5 +1,5 @@
 {
-  "name": "refute",
+  "name": "refute-contract",
   "version": "1.0.0",
   "description": "A runtime assertion and contract programming tool",
   "main": "lib/index.js",
@@ -26,7 +26,7 @@
     "contract programming"
   ],
   "author": "Konstantin Uvarin <khedin@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "chai": "^4.3.4",
     "eslint": "^8.4.1",
