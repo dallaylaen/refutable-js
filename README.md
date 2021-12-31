@@ -1,9 +1,9 @@
 # Overview
 
-refutable is a lightweight and flexible assertion and contract
-programming tool.
-It evaluates blocks of conditions and notifies the user should
-some of the checks fail.
+`refutable` is a lightweight and flexible assertion
+and contract programming tool.
+It evaluates blocks of conditions (aka contracts)
+and notifies the user should some of the checks fail.
 
 * Usable in both a standalone app or a browser.
 The compressed download size in <10kB.
