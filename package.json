@@ -1,5 +1,5 @@
 {
-  "name": "refute-contract",
+  "name": "refutable",
   "version": "1.0.0",
   "description": "A runtime assertion and contract programming tool",
   "main": "lib/index.js",

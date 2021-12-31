@@ -1,8 +1,8 @@
 # Overview
 
-refute-contract is a lightweight and flexible runtime assertion / contract
+refutable is a lightweight and flexible assertion and contract
 programming tool.
-It performs blocks of condition checks and notifies the user should
+It evaluates blocks of conditions and notifies the user should
 some of the checks fail.
 
 * Usable in both a standalone app or a browser.
@@ -21,7 +21,7 @@ a log message, an exception (the default), or even calling back home.
 ## Example
 
 ```javascript
-const refute = require( 'refute-contract' );
+const refute = require( 'refutable' );
 const order = {
     version: 1.3,
     total: 10.28,
@@ -172,13 +172,13 @@ This is the default one as exceptions are hard to forget about.
 Be careful about throwing exceptions in async code, though.
 
 ```javascript
-const refute = require( 'refute-contract' ).config( onFail: r => { throw new Error(r.toString) } );
+const refute = require( 'refutable' ).config( onFail: r => { throw new Error(r.toString) } );
 ```
 
 ## Logging
 
 ```javascript
-const refute = require( 'refute-contract' ).config({ onFail: r => console.log(r.toString) });
+const refute = require( 'refutable' ).config({ onFail: r => console.log(r.toString) });
 ```
 
 ## Calling home (don't forget a session!)
