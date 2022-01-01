@@ -1,6 +1,6 @@
 'use strict';
 
-const { refuteUnit } = require( '../lib/refute/mocha.js' );
+const { refuteUnit } = require( '../lib/mocha.js' );
 
 refuteUnit( "Foo bar", ok => {
     ok.equal( 42, 137, 'life is fine' );

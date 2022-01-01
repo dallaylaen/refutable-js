@@ -1,5 +1,5 @@
 'use strict';
-const refute = require('../lib/refute.js')
+const refute = require('../lib/index.js')
     .config({ onFail: skip=>true });
 
 // TODO use some kind of getopt
