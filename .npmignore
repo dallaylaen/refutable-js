@@ -1,6 +1,6 @@
 # npm-specific
-aux
-docs
+aux/
+docs/
 # the rest is copy-and-paste from .gitignore
 .*.sw[pon]
 .nyc*
