@@ -157,13 +157,13 @@ r(
 One can test try out varyous contracts
 at the [playground](https://dallaylaen.github.io/refute-js/).
 
-# Customizing refute 
+# Customizing refute
 
 `refute.config` function may be used to create an isolated instance of refute
 with different parameters, in particular, the onFail action.
 
 This is done so to allow changing refute's setup in one package
-without affecting the others. 
+without affecting the others.
 
 ## Throwing
 
@@ -221,16 +221,22 @@ Note that implementation does _not_ have access to the report object.
 ## addCondition/isPrime
 
 ```jabascript
-addCondition(
+refute.addCondition(
     'isPrime',
     { args: 1 },
     n => {
         // Not the most efficient way but it will do as an example
-        for (let i = 2; i*i < n; i++)
-            n % i || return i + ' divides ' + n;
-        return 0;
+        for (let i = 2; i*i <= n; i++)
+            if(!( n % i ))
+                return i + ' divides ' + n;
     }
 );
+refute( r=> {
+    r.isPrime(2021);
+    r.isPrime(25);
+    r.isPrime(47);
+    r.isPrime(2);
+});
 ```
 
 # Author
