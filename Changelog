@@ -1,0 +1,10 @@
+This is changelog for `refuteable`
+
+Sat Jan 8 2022 v1.0.1
+    - Fix examples
+
+Fri Dec 31 2021 v1.0.0
+    - Initial release
+    - Report class
+    - runtime assertions via refute(...)
+
