@@ -239,7 +239,13 @@ refute( r=> {
 });
 ```
 
+# Thanks
+
+[Alexander Kuklev](https://github.com/akuklev) for early discussion.
+
+Kirill Sukhomlin for coding style feedback.
+
 # Author
 
-Copyright (c) Konstantin Uvarin 2021
+Copyright (c) Konstantin Uvarin 2021-2022
 
