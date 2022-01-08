@@ -6,6 +6,7 @@ docs/
 .nyc*
 coverage
 node_modules
+package-lock.json
 out
 *.skip
 *.skip.*
