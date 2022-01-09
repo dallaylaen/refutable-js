@@ -12,6 +12,7 @@
     },
     "rules": {
         "semi": 0,
+        "no-extra-semi": 2,
         "indent": [ "error", 4 ],
         "no-multi-spaces": 0,
         "curly": [ 2, "multi-or-nest" ],
