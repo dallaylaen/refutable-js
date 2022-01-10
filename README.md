@@ -21,29 +21,29 @@ a log message, an exception (the default), or even calling back home.
 ## Example
 
 ```javascript
-const refute = require( 'refutable' );
-const order = {
+  const refute = require( 'refutable' );
+  const order = {
     version: 1.3,
-    total: 10.28,
-    price: 9,
-    tax: 1.27,
-    nmae: 'q. e. 2',
-    cart: [
-        { id: 7, qty: 1, price: 5 },
-        { id: 13, qty: 0, price: 2 },
-        { id: 22, qty: 2, price: 2 },
+    total:   10.28,
+    price:   9,
+    tax:     1.27,
+    nmae:    'q. e. 2',
+    cart:    [
+      { id: 7, qty: 1, price: 5 },
+      { id: 13, qty: 0, price: 2 },
+      { id: 22, qty: 2, price: 2 },
     ],
-};
-refute (r=>{
+  };
+  refute(r => {
     r.type( order.version, 'number', 'a numeric version is included' );
     r.equal( order.total, order.price + order.tax, 'money adds up' );
     r.match( order.name, /\w/, 'the only assumption to be made about a name' );
     r.forEach( 'check items in the cart', order.cart, (inner, item) => {
-        inner.type( item.id, 'integer', 'items should have ids' );
-        inner.type( item.qty, 'integer', 'number of items is whole' );
-        inner.cmpNum( item.qty, '>', 0, 'at least one item bought' );
+      inner.type( item.id, 'integer', 'items should have ids' );
+      inner.type( item.qty, 'integer', 'number of items is whole' );
+      inner.cmpNum( item.qty, '>', 0, 'at least one item bought' );
     });
-});
+  });
 ```
 
 _Note that while we use data validation in this example, nothing prevents
@@ -152,6 +152,13 @@ r(
 )
 ```
 
+A simpler form of stringified report, getGhost(),
+only shows which checks have passed and failed:
+
+```
+r(1,N,r(2))
+```
+
 ## Playground
 
 One can test try out varyous contracts
@@ -172,13 +179,13 @@ This is the default one as exceptions are hard to forget about.
 Be careful about throwing exceptions in async code, though.
 
 ```javascript
-const refute = require( 'refutable' ).config( onFail: r => { throw new Error(r.toString) } );
+  const refute = require( 'refutable' ).config({ onFail: r => { throw new Error(r.toString()) } });
 ```
 
 ## Logging
 
 ```javascript
-const refute = require( 'refutable' ).config({ onFail: r => console.log(r.toString) });
+  const refute = require( 'refutable' ).config({ onFail: r => console.log(r.toString()) });
 ```
 
 ## Calling home (don't forget a session!)
@@ -187,14 +194,14 @@ const refute = require( 'refutable' ).config({ onFail: r => console.log(r.toStri
 # Using report outside runtime assertions
 
 ```javascript
-const report = new refute.Report();
-report.run( r => {
-    r.equal ( ... );
-});
-report.getPass(); // true|false
-report.getDone(); // true|false
-report.getCount(); // number of checks run
-report.toString(); // stringified version described above
+  const report = new refute.Report();
+  report.run( r => {
+    r.equal( foo, bar, 'foo equals bar' );
+  });
+  report.getPass(); // true|false
+  report.getDone(); // true|false
+  report.getCount(); // number of checks run
+  report.toString(); // stringified version described above
 ```
 
 # Custom conditions
@@ -220,23 +227,31 @@ Note that implementation does _not_ have access to the report object.
 
 ## addCondition/isPrime
 
-```jabascript
-refute.addCondition(
+```javascript
+  // define a new condition
+  refute.addCondition(
     'isPrime',
     { args: 1 },
     n => {
-        // Not the most efficient way but it will do as an example
-        for (let i = 2; i*i <= n; i++)
-            if(!( n % i ))
-                return i + ' divides ' + n;
+      // Not the most efficient way but it will do as an example
+      for (let i = 2; i * i <= n; i++) {
+        if (!( n % i ))
+          return i + ' divides ' + n;
+      }
     }
-);
-refute( r=> {
+  );
+  // test it for most obvious cases
+  const report = new refute.Report().run (r => {
     r.isPrime(2021);
     r.isPrime(25);
     r.isPrime(47);
     r.isPrime(2);
-});
+  });
+  // more fine-grained ways of verifying a report exist
+  // but getGhost is the simplest
+  refute (r => {
+    r.equal (report.getGhost(), 'r(N,N,2)', '2 failing & 2 passing checks' );
+  });
 ```
 
 # Thanks
