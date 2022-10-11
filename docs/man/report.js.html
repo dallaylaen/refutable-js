@@ -28,7 +28,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict';
 
-const { callerInfo, explain } = require( './util.js' );
+const { callerInfo, explain } = require('./util.js');
 
 /**
  *   @callback Contract
@@ -60,7 +60,7 @@ class Report {
      *  Contracts may need to be set up inside callbacks _after_ creation,
      *  hence this convention.
      */
-    constructor() {
+    constructor () {
         this._count     = 0;
         this._failCount = 0;
         this._descr     = [];
@@ -86,8 +86,8 @@ class Report {
      *   @example
      *   report.onDone( r => { if (!r.getPass()) console.log(r.toString()) } )
      */
-    onDone(fn) {
-        if( typeof fn !== 'function' )
+    onDone (fn) {
+        if (typeof fn !== 'function')
             throw new Error('onDone(): callback must be a function');
         this._lock();
         this._onDone.push(fn);
@@ -103,8 +103,8 @@ class Report {
      *   @example
      *   report.onFail( r => console.log(r.toString()) );
      */
-    onFail(fn) {
-        if( typeof fn !== 'function' )
+    onFail (fn) {
+        if (typeof fn !== 'function')
             throw new Error('onDone(): callback must be a function');
         this._lock();
         this._onDone.push(r => r.getPass() || fn(r));
@@ -150,13 +150,13 @@ class Report {
      *   r.getPass(); // false
      *   r.getDone(); // true
      */
-    run(...args) {
+    run (...args) {
         // TODO either async() should support additional args, or run() shouldn't
         this._lock();
         const block = args.pop();
         if (typeof block !== 'function')
-            throw new Error('Last argument of run() must be a function, not '+typeof(block));
-        const result = block( this, ...args );
+            throw new Error('Last argument of run() must be a function, not ' + typeof block);
+        const result = block(this, ...args);
         if (result instanceof Promise)
             result.then( () => this.done() );
         else
@@ -178,12 +178,13 @@ class Report {
      *       .runSync( ok => ok.type ( [], 'array', 'some more checks' ) )
      *       .done();
      */
-    runSync(...args) {
+    runSync (...args) {
         this._lock();
         const block = args.pop();
         if (typeof block !== 'function')
-            throw new Error('Last argument of run() must be a function, not '+typeof(block));
-        const result = block( this, ...args );
+            throw new Error('Last argument of run() must be a function, not ' + typeof block);
+        const result = block( this, ...args ); /* eslint-disable-line no-unused-vars */
+        // TODO check that `result` is NOT a promise
         return this;
     }
 
@@ -205,9 +206,9 @@ class Report {
                 evidence = []; // hack - failing without explanation
             } else {
                 // nested contract is in async mode - coerce into a promise
-                const curry = evidence;
-                evidence = new Promise( done => {
-                    curry.onDone( done );
+                const curry = evidence; /* eslint-disable-line */
+                evidence = new Promise( (resolve, reject) => {
+                    curry.onDone( resolve );
                 });
             }
         }
@@ -220,7 +221,7 @@ class Report {
                 this._pending.delete(n);
                 this._setResult(n, x, condName, where );
                 if (this.getDone()) {
-                    for (let i = this._onDone.length; i-->0; )
+                    for (let i = this._onDone.length; i-- > 0; )
                         this._onDone[i](this);
                 }
             });
@@ -230,14 +231,14 @@ class Report {
         return this._setResult(n, evidence, condName, where || callerInfo(2));
     }
 
-    _setResult(n, evidence, condName, where) {
+    _setResult (n, evidence, condName, where) {
         if (!evidence)
             return;
 
         // listify &amp; stringify evidence, so that it doesn't change post-factum
         if (!Array.isArray(evidence))
-            evidence = [ evidence ];
-        this._evidence[n] = evidence.map( x=>_explain(x, Infinity) );
+            evidence = [evidence];
+        this._evidence[n] = evidence.map( x => _explain(x, Infinity) );
         this._where[n]    = where;
         this._condName[n] = condName;
         this._failCount++;
@@ -249,11 +250,11 @@ class Report {
      * @param {Any} message
      * @returns {Report} chainable
      */
-    info( ...message ) {
+    info ( ...message ) {
         this._lock();
         if (!this._info[this._count])
             this._info[this._count] = [];
-        this._info[this._count].push( message.map( s=>_explain(s) ).join(" ") );
+        this._info[this._count].push( message.map( s => _explain(s) ).join(' ') );
         return this;
     }
 
@@ -263,14 +264,14 @@ class Report {
      *   unless there are pending async checks.
      *   @returns {Report} this (chainable)
      */
-    done() {
+    done () {
         if (!this._done) {
             this._done = true;
             if (!this._pending.size) {
-                for (let i = this._onDone.length; i-->0; )
+                for (let i = this._onDone.length; i-- > 0; )
                     this._onDone[i](this);
             }
-        };
+        }
         return this;
     }
 
@@ -287,7 +288,7 @@ class Report {
      *          i.e. done() was called &amp; no pending async checks.
      *   @returns {boolean}
      */
-    getDone() {
+    getDone () {
         return this._done &amp;&amp; !this._pending.size; // is it even needed?
     }
 
@@ -301,7 +302,7 @@ class Report {
      *   @param {integer} n
      *   @returns {boolean}
      */
-    getPass(n) {
+    getPass (n) {
         if (n === undefined)
             return this._failCount === 0;
         return (n > 0 &amp;&amp; n &lt;= this._count) ? !this._evidence[n] : undefined;
@@ -311,7 +312,7 @@ class Report {
      *   @desc Number of checks performed.
      *   @returns {number}
      */
-    getCount() {
+    getCount () {
         return this._count;
     }
 
@@ -320,7 +321,7 @@ class Report {
      *  This is just a shortcut for foo.getDetails(foo.getCount).pass
      *  @returns {boolean}
      */
-    last() {
+    last () {
         return this._count ? !this._evidence[this._count] : undefined;
     }
 
@@ -328,7 +329,7 @@ class Report {
      *   @desc Number of checks failing.
      *   @returns {number}
      */
-    getFailCount() {
+    getFailCount () {
         return this._failCount;
     }
 
@@ -352,20 +353,20 @@ class Report {
      *   // no checks were run - auto-fail
      *   "r(Z)"
      */
-    getGhost() {
+    getGhost () {
         const ghost = [];
-        let streak = 0;
-        for (let i=1; i &lt;= this._count; i++) {
+        let streak  = 0;
+        for (let i = 1; i &lt;= this._count; i++) {
             if (this._evidence[i] || this._nested[i]) {
                 if (streak) ghost.push(streak);
                 streak = 0;
                 ghost.push( this._nested[i] ? this._nested[i].getGhost() : 'N');
-            } else {
+            } else { /* eslint-desable-line curly */
                 streak++;
             }
         }
         if (streak) ghost.push(streak);
-        return 'r('+ghost.join(',')+')';
+        return 'r(' + ghost.join(',') + ')';
     }
 
     /**
@@ -398,54 +399,54 @@ class Report {
      *      + peace
      *  )
      */
-    toString() {
+    toString () {
         // TODO replace with refute.io when we buy the domain
-        return 'refute/'+protocol+'\n'+this.getLines().join('\n');
+        return 'refute/' + protocol + '\n' + this.getLines().join('\n');
     }
 
-    getLines(indent='') {
-        const out = [indent + 'r('];
+    getLines (indent = '') {
+        const out  = [indent + 'r('];
         const last = indent + ')';
-        indent = indent + '    ';
+        indent     = indent + '    ';
 
         const pad = prefix => s => indent + prefix + ' ' + s;
 
         if (this._info[0])
             out.push( ...this._info[0].map( pad(';') ) );
-        for (let n = 1; n&lt;=this._count; n++) {
+        for (let n = 1; n &lt;= this._count; n++) {
             out.push( ...this.getLinesPartial( n, indent ) );
             if (this._info[n])
                 out.push( ...this._info[n].map( pad(';') ) );
-        };
+        }
         out.push(last);
         return out;
     }
 
-    getLinesPartial(n, indent='') {
+    getLinesPartial (n, indent = '') {
         const out = [];
         out.push(
             indent
-            +(this._pending.has(n) ? '...' : (this._evidence[n] ? '!':'') )
-            +n+(this._descr[n] ? '. '+this._descr[n] : '.')
+            + (this._pending.has(n) ? '...' : (this._evidence[n] ? '!' : '') )
+            + n + (this._descr[n] ? '. ' + this._descr[n] : '.')
         );
-        if( this._nested[n]) {
+        if (this._nested[n]) { /* eslint-disable-line curly */
             out.push( ...this._nested[n].getLines(indent) );
-        } else if( this._evidence[n] ) {
-            out.push( indent + '    ^ Condition `'+(this._condName[n] || 'check')
-                +'` failed at '+this._where[n] );
+        } else if (this._evidence[n]) {
+            out.push( indent + '    ^ Condition `' + (this._condName[n] || 'check')
+                + '` failed at ' + this._where[n] );
             this._evidence[n].forEach( raw => {
                 // Handle multiline evidence
                 // TODO this is perl written in JS, rewrite more clearly
-                let[ _, prefix, s ] = raw.match( /^([-+|] )?(.*?)\n?$/s );
+                let [_, prefix, s] = raw.match( /^([-+|] )?(.*?)\n?$/s );
                 if (!prefix) prefix = '| ';
-                if (!s.match(/\n/)) {
+                if (!s.match(/\n/)) { /* esline-disable-line curly */
                     out.push( indent + '    ' + prefix + s );
                 } else {
                     s.split('\n').forEach(
                         part => out.push( indent + '    ' + prefix + part ));
-                };
+                }
             });
-        };
+        }
         return out;
     }
 
@@ -453,18 +454,18 @@ class Report {
      *  @desc returns a plain serializable object
      *  @returns {Object}
      */
-    toJSON() {
+    toJSON () {
         const n = this.getCount();
         const details = [];
-        for (let i = 0; i&lt;=n; i++) {
+        for (let i = 0; i &lt;= n; i++) {
             const node = this.getDetails(i);
             // strip extra keys
-            for( let key in node ) {
+            for (const key in node) {
                 if (node[key] === undefined || (Array.isArray(node[key]) &amp;&amp; node[key].length === 0))
                     delete node[key];
-            };
+            }
             details.push(node);
-        };
+        }
         return {
             pass:  this.getPass(),
             count: this.getCount(),
@@ -477,7 +478,7 @@ class Report {
      *   @param {integer} n - check number, must be &lt;= getCount()
      *   @returns {object}
      */
-    getDetails(n) {
+    getDetails (n) {
         // TODO validate n
 
         // ugly but what can I do
@@ -508,11 +509,11 @@ class Report {
 
 // this is for stuff like `object foo = {"foo":42}`
 // we don't want the explanation to be quoted!
-function _explain( item, depth ) {
+function _explain ( item, depth ) {
     if (typeof item === 'string' )
         return item;
     return explain( item, { depth } );
-};
+}
 
 Report.prototype.explain = explain; // also make available via report
 Report.protocol = protocol;
@@ -520,6 +521,8 @@ Report.protocol = protocol;
 // part of addCondition
 const knownChecks = new Set();
 
+/* NOTE Please keep all addCondition invocations searchable via */
+/* grep -r "^ *addCondition.*'" /
 /**
  *  @memberOf refute
  *  @static
@@ -548,7 +551,7 @@ function addCondition (name, options, impl) {
     // TODO must do something about name clashes, but later
     // because eval in browser may (kind of legimitely) override conditions
     if (!knownChecks.has(name) &amp;&amp; Report.prototype[name])
-        throw new Error('Method already exists in Report: '+name);
+        throw new Error('Method already exists in Report: ' + name);
     if (typeof options !== 'object')
         throw new Error('bad options');
     if (typeof impl !== 'function')
@@ -567,12 +570,13 @@ function addCondition (name, options, impl) {
     // TODO alert unknown options
 
     // TODO this code is cluttered, rewrite
-    const code = function(...args) {
+    const code = function (...args) {
+        // TODO const nArgs = args.length
         const descr = descrFirst
             ? args.shift()
-            : ( (args.length > maxArgs &amp;&amp; typeof args[args.length-1] === 'string') ? args.pop() : undefined);
+            : ( (args.length > maxArgs &amp;&amp; typeof args[args.length - 1] === 'string') ? args.pop() : undefined);
         if (args.length > maxArgsReal || args.length &lt; minArgs)
-            throw new Error('Condition '+name+' must have '+minArgs+'..'+maxArgsReal+' arguments '); // TODO
+            throw new Error('Condition ' + name + ' must have ' + minArgs + '..' + maxArgsReal + ' arguments '); // TODO
 
         return this.setResult( impl(...args), descr, name );
     };
@@ -647,38 +651,36 @@ function addCondition (name, options, impl) {
  *   @returns {undefined}
  */
 
-addCondition(
-    'check',
-    {args:1},
-    x=>x
+addCondition( 'check',
+    { args: 1 },
+    x => x
 );
-addCondition(
-    'pass',
-    {args:0},
-    ()=>0
+addCondition( 'pass',
+    { args: 0 },
+    () => 0
 );
-addCondition(
-    'fail',
-    {args:0},
-    ()=>'failed deliberately'
+addCondition( 'fail',
+    { args: 0 },
+    () => 'failed deliberately'
 );
-addCondition(
-    'equal',
-    {args:2},
-    (a,b) => a === b ? 0 : [ '- '+explain(a), '+ ' + explain(b) ]
+addCondition( 'equal',
+    { args: 2 },
+    (a, b) => a === b ? 0 : ['- ' + explain(a), '+ ' + explain(b)]
 );
-addCondition(
-    'match',
-    {args:2},
-    (a,rex) => (a === undefined || a === null) ? [''+a, 'Does not match : '+rex]
-        : (''+a).match(rex) ? 0 : [
-        'String         : '+a,
-        'Does not match : '+rex
-    ]
+addCondition( 'match',
+    { args: 2 },
+    // TODO function(str, rex)
+    (a, rex) => (a === undefined || a === null)
+        ? ['' + a, 'Does not match : ' + rex]
+        : ('' + a).match(rex)
+            ? 0
+            : [
+                'String         : ' + a,
+                'Does not match : ' + rex,
+            ]
 );
-addCondition(
-    'nested',
-    {fun:1,minArgs:1},
+addCondition( 'nested',
+    { fun: 1, minArgs: 1 },
     (...args) => new Report().run(...args).done()
 );
 
@@ -699,7 +701,7 @@ module.exports = { Report, addCondition, explain };
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Dec 31 2021 16:08:55 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Oct 11 2022 13:24:55 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
