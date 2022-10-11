@@ -114,8 +114,24 @@ Each condition is a falsifyable statement about some data and/or code:
 In particular, conditions may include nested contracts.
 
 Conditions are implemented as methods of the report object.
-The basic arsenal of checks is described
-[here](https://dallaylaen.github.io/refutable-js/man/conditions.html).
+
+Currently the following conditions are available:
+
+* `check`
+* `pass`
+* `fail`
+* `equal`
+* `match`
+* `nested`
+* `cmpNum`
+* `cmpStr`
+* `type`
+* `forEach`
+* `ordered`
+* `deepEqual`
+
+The detailed documentation can be found on 
+[github](https://dallaylaen.github.io/refutable-js/man/conditions.html).
 
 ## Evidence
 
