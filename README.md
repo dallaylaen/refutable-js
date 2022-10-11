@@ -117,18 +117,53 @@ Conditions are implemented as methods of the report object.
 
 Currently the following conditions are available:
 
-* `check`
-* `pass`
-* `fail`
-* `equal`
-* `match`
-* `nested`
-* `cmpNum`
-* `cmpStr`
-* `type`
-* `forEach`
-* `ordered`
-* `deepEqual`
+* `check (evidence, [comment])`
+
+Most basic check, will fail if evidence is a true-ish value
+
+* `equal (actual, expected, [comment])`
+
+* `match (string, regexp, [comment])`
+
+* `nested (comment, subcontract )`
+
+A nested contract. Subcontract must be a function that takes a _fresh_
+report object.
+
+* `cmpNum (actual, op, expected, [comment])`
+
+Compare 2 values (not necessarily numbers).
+
+`op` is one of: '<', '>', '<=', '>=', '==', '!='
+
+* `cmpStr (actual, op, expected, [comment])`
+
+Compare 2 values as strings.
+
+`op` is one of: '<', '>', '<=', '>=', '==', '!='
+
+* `type (actual, expectedType, [comment])`
+
+expectedType is one of: 'undefined', 'null', 'number', 'integer', 'nan',
+'string', 'boolean', 'object', 'array',
+a class, or an array (meaning a sum of types) containing 1 or more of the above.
+
+* `forEach (comment, list, subcontract)`
+
+Subcontract must be a function taking report and a value.
+
+Checks that it passes for all values in the list.
+
+* `ordered (comment, list, subcontract)`
+
+Subcontract must be a function taking report and two values.
+
+Checks that it passes for all _subsequent_ value _pairs_ in the list.
+
+* `deepEqual (actual, expected, [options={}], [comment])`
+
+Output will be generated as tuples of (position, actual, expected).
+Only a few (default is 5) such tuples will be generated.
 
 The detailed documentation can be found on 
 [github](https://dallaylaen.github.io/refutable-js/man/conditions.html).
