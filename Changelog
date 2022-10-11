@@ -1,5 +1,8 @@
 # This is changelog for `refutable`
 
+Tue Oct 11 2022 v1.0.3
+    - Fix documentation, update github links. 
+
 Mon Jan 10 2022 v1.0.2
     - Fix code style, add eslint config
 
