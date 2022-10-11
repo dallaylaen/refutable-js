@@ -97,10 +97,10 @@ Less is more, and runtime assertions are really refutations.
 
 ## Contracts
 
-A [contract](https://dallaylaen.github.io/refute-js/man/global.html#Contract)
+A [contract](https://dallaylaen.github.io/refutable-js/man/global.html#Contract)
 is a block of code containing one or more condition checks.
 
-The first argument is a [report](https://dallaylaen.github.io/refute-js/man/Report.html)
+The first argument is a [report](https://dallaylaen.github.io/refutable-js/man/Report.html)
 object that keeps track of condition checks and their results.
 
 Additional arguments may follow, if needed
@@ -115,7 +115,7 @@ In particular, conditions may include nested contracts.
 
 Conditions are implemented as methods of the report object.
 The basic arsenal of checks is described
-[here](https://dallaylaen.github.io/refute-js/man/conditions.html).
+[here](https://dallaylaen.github.io/refutable-js/man/conditions.html).
 
 ## Evidence
 
@@ -162,7 +162,7 @@ r(1,N,r(2))
 ## Playground
 
 One can test try out varyous contracts
-at the [playground](https://dallaylaen.github.io/refute-js/).
+at the [playground](https://dallaylaen.github.io/refutable-js/).
 
 # Customizing refute
 
@@ -207,7 +207,7 @@ Be careful about throwing exceptions in async code, though.
 # Custom conditions
 
 New conditions may be added via
-[refute.addCondition(name, options, implementation)](https://dallaylaen.github.io/refute-js/man/refute.html#.addCondition)
+[refute.addCondition(name, options, implementation)](https://dallaylaen.github.io/refutable-js/man/refute.html#.addCondition)
 static function.
 
 This creates a function named `name` in `Report.prototype` (and thus all
