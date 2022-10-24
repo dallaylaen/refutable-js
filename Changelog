@@ -1,5 +1,9 @@
 # This is changelog for `refutable`
 
+Mon Oct 24 2022 v1.0.4
+    - deepEquals now reports $["foo"] as $.foo
+    - replaced a DIY (internal) class with stock Map
+
 Tue Oct 11 2022 v1.0.3
     - Fix documentation, update github links. 
 
