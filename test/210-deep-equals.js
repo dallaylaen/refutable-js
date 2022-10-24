@@ -91,11 +91,12 @@ describe( 'deepEqual', () => {
         [
             'multiple errors',
             false,
-            [ { "foo": [42, 42]}, { "bar":137 }, { "quuz": true } ],
-            [ { "foo": [42, 43]}, { "bar":137 }, { "quuz": false } ],
+            [ { "foo": [42, 42]}, { "bar":137 }, { "qu'uz": true } ],
+            [ { "foo": [42, 43]}, { "bar":137 }, { "qu'uz": false } ],
             (ok, lines) => {
                 ok.equal( lines.length, 6 );
-                ok.match( lines[0], /\[0\]\["foo"\]\[1\]/ );
+                ok.match( lines[0], /\[0\].foo\[1\]/ );
+                ok.match( lines[3], /\[2\]\["qu'uz"\]/ );
             }
         ],
         [
