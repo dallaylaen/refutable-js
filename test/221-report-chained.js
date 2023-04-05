@@ -17,4 +17,24 @@ describe( 'Report', () => {
                 done();
             });
     });
+
+    it('can handle promise', done => {
+        new Report()
+            .check(Promise.resolve('fail deliberately'))
+            .done( r => {
+                expect( r.getGhost() ).to.equal( 'r(N)');
+                console.log(r + '');
+                done();
+            })
+    });
+
+    it('can handle nested promise', done => {
+        new Report()
+            .nested( 'deep', r => r.check( Promise.resolve('fail deliberately')))
+            .done( r => {
+                console.log( ''+r );
+                expect( r.getGhost() ).to.equal('r(r(N))');
+                done();
+            })
+    })
 })
