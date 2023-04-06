@@ -34,11 +34,11 @@ a log message, an exception (the default), or even calling back home.
       { id: 22, qty: 2, price: 2 },
     ],
   };
-  refute(r => {
-    r.type( order.version, 'number', 'a numeric version is included' );
-    r.equal( order.total, order.price + order.tax, 'money adds up' );
-    r.match( order.name, /\w/, 'the only assumption to be made about a name' );
-    r.forEach( 'check items in the cart', order.cart, (inner, item) => {
+  refute(r => r
+    .type( order.version, 'number', 'a numeric version is included' );
+    .equal( order.total, order.price + order.tax, 'money adds up' );
+    .match( order.name, /\w/, 'the only assumption to be made about a name' );
+    .forEach( 'check items in the cart', order.cart, (inner, item) => {
       inner.type( item.id, 'integer', 'items should have ids' );
       inner.type( item.qty, 'integer', 'number of items is whole' );
       inner.cmpNum( item.qty, '>', 0, 'at least one item bought' );
@@ -93,7 +93,7 @@ r(
 
 ## Naming
 
-Less is more, and runtime assertions are really refutations.
+Less is more, and runtime assertions are actually  refutations.
 
 ## Contracts
 
@@ -113,13 +113,13 @@ Each condition is a falsifyable statement about some data and/or code:
 
 In particular, conditions may include nested contracts.
 
-Conditions are implemented as methods of the report object.
+Conditions are implemented as methods of the report object. They are chainable, i.e. return the object itself.
 
 Currently the following conditions are available:
 
 * `check (evidence, [comment])`
 
-Most basic check, will fail if evidence is a true-ish value
+Most basic check, will fail if _evidence_ evaluates to true. If a Promise is given instead, the check will be pending until the promise resolves, and the returned value will be substituted for _evidence_.
 
 * `equal (actual, expected, [comment])`
 
@@ -138,7 +138,7 @@ Compare 2 values (not necessarily numbers).
 
 * `cmpStr (actual, op, expected, [comment])`
 
-Compare 2 values as strings.
+Compare 2 values but stringify them before comparison is made.
 
 `op` is one of: '<', '>', '<=', '>=', '==', '!='
 
@@ -203,12 +203,14 @@ r(
 )
 ```
 
-A simpler form of stringified report, getGhost(),
+An abbreviated form of stringified report, available via getGhost() method,
 only shows which checks have passed and failed:
 
 ```
 r(1,N,r(2))
 ```
+
+It can be used to vefiry conditions / contracts themselves by giving them deliberately incorrect inputs.
 
 ## Playground
 
