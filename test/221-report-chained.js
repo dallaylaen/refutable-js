@@ -12,7 +12,6 @@ describe( 'Report', () => {
                 .equal( 2+2, 4, 'ok test just in case' )
             )
             .done( r => {
-                console.log('here');
                 expect( r.getGhost() ).to.equal('r(N,1,r(1))');
                 done();
             });
@@ -23,7 +22,6 @@ describe( 'Report', () => {
             .check(Promise.resolve('fail deliberately'))
             .done( r => {
                 expect( r.getGhost() ).to.equal( 'r(N)');
-                console.log(r + '');
                 done();
             })
     });
@@ -32,7 +30,6 @@ describe( 'Report', () => {
         new Report()
             .nested( 'deep', r => r.check( Promise.resolve('fail deliberately')))
             .done( r => {
-                console.log( ''+r );
                 expect( r.getGhost() ).to.equal('r(r(N))');
                 done();
             })
