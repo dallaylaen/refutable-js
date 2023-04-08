@@ -125,6 +125,10 @@ Most basic check, will fail if _evidence_ evaluates to true. If a Promise is giv
 
 * `match (string, regexp, [comment])`
 
+* `within (value, min, max, [comment])`
+
+Check that value (typically string or number) is within closed interval [min, max].
+
 * `nested (comment, subcontract )`
 
 A nested contract. Subcontract must be a function that takes a _fresh_
