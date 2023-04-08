@@ -1,5 +1,8 @@
 # This is changelog for `refutable`
 
+Sat Apr 08 2023 v1.0.6
+    - Create within(value, min, max) condition
+
 Thu Apr 06 2023 v1.0.5
     - make condition checks chainable
     - r.done(callback) will execute callback(r) on completion
